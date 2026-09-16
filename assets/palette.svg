@@ -16,9 +16,9 @@
 <rect x="372" y="38" width="76" height="76" rx="8" fill="#da5b2d"/>
 <text x="410.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Molten Rust</text>
 <text x="410.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#da5b2d</text>
-<rect x="460" y="38" width="76" height="76" rx="8" fill="#0a883d"/>
+<rect x="460" y="38" width="76" height="76" rx="8" fill="#199647"/>
 <text x="498.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Forest Kelly</text>
-<text x="498.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#0a883d</text>
+<text x="498.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#199647</text>
 <rect x="548" y="38" width="76" height="76" rx="8" fill="#8fe259"/>
 <text x="586.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Neon Lime</text>
 <text x="586.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#8fe259</text>
@@ -37,9 +37,9 @@
 <rect x="196" y="170" width="76" height="76" rx="8" fill="#008388"/>
 <text x="234.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Lagoon Teal</text>
 <text x="234.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#008388</text>
-<rect x="284" y="170" width="76" height="76" rx="8" fill="#94d2bd"/>
+<rect x="284" y="170" width="76" height="76" rx="8" fill="#65dcb9"/>
 <text x="322.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Pearl Aqua</text>
-<text x="322.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#94d2bd</text>
+<text x="322.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#65dcb9</text>
 <rect x="372" y="170" width="76" height="76" rx="8" fill="#6d787c"/>
 <text x="410.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Stone Gray</text>
 <text x="410.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#6d787c</text>

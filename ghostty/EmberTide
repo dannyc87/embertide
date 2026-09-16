@@ -14,7 +14,7 @@ bold-is-bright = true
 
 palette = 0=#001219
 palette = 1=#c23626
-palette = 2=#0a883d
+palette = 2=#199647
 palette = 3=#ee9b00
 palette = 4=#00b4d8
 palette = 5=#ab51e3
@@ -26,5 +26,5 @@ palette = 10=#8fe259
 palette = 11=#febd5c
 palette = 12=#0ad6ff
 palette = 13=#cf76ff
-palette = 14=#94d2bd
+palette = 14=#65dcb9
 palette = 15=#f6ebca

@@ -8,7 +8,7 @@
   "selectionBackground": "#4376c2",
   "black": "#001219",
   "red": "#c23626",
-  "green": "#0a883d",
+  "green": "#199647",
   "yellow": "#ee9b00",
   "blue": "#00b4d8",
   "purple": "#ab51e3",
@@ -20,6 +20,6 @@
   "brightYellow": "#febd5c",
   "brightBlue": "#0ad6ff",
   "brightPurple": "#cf76ff",
-  "brightCyan": "#94d2bd",
+  "brightCyan": "#65dcb9",
   "brightWhite": "#f6ebca"
 }

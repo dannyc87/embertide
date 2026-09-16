@@ -21,7 +21,7 @@ EmberTide fixes that instead of hiding it:
 - **Green, blue, and magenta are all specified directly**, not synthesized from an
   arbitrary hue target. In each pair, one color was hand-picked and the other derived
   only to match its hue at a passing contrast: bright green (`#8fe259`) and bright blue
-  (`#0ad6ff`) came with a derived darker normal (`#0a883d`, `#00b4d8`); normal magenta
+  (`#0ad6ff`) came with a derived darker normal (`#199647`, `#00b4d8`); normal magenta
   (`#ab51e3`) came with a derived lighter bright (`#cf76ff`).
 - **Cyan is deepened**, not untouched — once blue moved to a vivid, light azure
   (`#00b4d8`), the original Dark Cyan (`#0a9396`) sat too close to it in OKLab space to
@@ -39,6 +39,13 @@ EmberTide fixes that instead of hiding it:
   (`#005f73`) sat at almost exactly blue's hue (218.7° vs. 219.0°) once blue became a
   vivid azure, so it read as a muddy, darker blue rather than an intentional highlight.
   Deep Indigo (`#4376c2`, 258°) sits in genuinely open hue territory instead.
+- **Saturation is checked, not just hue and contrast** — as a percentage of the maximum
+  chroma achievable at a color's own lightness and hue (how close it sits to the sRGB
+  gamut edge), most of the palette runs 76–100% saturated, but Pearl Aqua sat at only
+  44% — the one color untouched since the very first version — making it read as
+  noticeably "pastel" next to everything else's "neon." Raised to 75% (`#65dcb9`), same
+  hue and lightness. Forest Kelly (green) was also lifted from 4.2:1 to 5.0:1 contrast
+  for a brighter feel, same hue, still ~95% saturated.
 - **Background, foreground, yellow, white, and cursor are untouched** — they were
   already hue-accurate and high-contrast in the source palette.
 - **Contrast floors:** ≥3.5:1 for the normal row and for bright-black (it needs to
@@ -174,7 +181,7 @@ into your user or workspace `settings.json`.
 |---|---|---|---|
 | 0 | Black | `#001219` | — |
 | 1 | Red | `#c23626` | 3.5:1 |
-| 2 | Green | `#0a883d` | 4.2:1 |
+| 2 | Green | `#199647` | 5.0:1 |
 | 3 | Yellow | `#ee9b00` | 8.5:1 |
 | 4 | Blue | `#00b4d8` | 7.7:1 |
 | 5 | Magenta | `#ab51e3` | 4.6:1 |
@@ -191,7 +198,7 @@ into your user or workspace `settings.json`.
 | 11 | Bright yellow | `#febd5c` | 11.5:1 |
 | 12 | Bright blue | `#0ad6ff` | 11.0:1 |
 | 13 | Bright magenta | `#cf76ff` | 7.0:1 |
-| 14 | Bright cyan | `#94d2bd` | 11.1:1 |
+| 14 | Bright cyan | `#65dcb9` | 11.3:1 |
 | 15 | Bright white | `#f6ebca` | 16.0:1 |
 
 All 16 slots are unique.
@@ -210,14 +217,14 @@ every color the theme actually uses is named and listed together as one palette:
 | Golden Orange | `#ee9b00` | cursor, yellow |
 | Crimson Ember | `#c23626` | red |
 | Molten Rust | `#da5b2d` | bright red |
-| Forest Kelly | `#0a883d` | green |
+| Forest Kelly | `#199647` | green |
 | Neon Lime | `#8fe259` | bright green |
 | Azure | `#00b4d8` | blue |
 | Sky Flash | `#0ad6ff` | bright blue |
 | Electric Violet | `#ab51e3` | magenta |
 | Lilac Flash | `#cf76ff` | bright magenta |
 | Lagoon Teal | `#008388` | cyan |
-| Pearl Aqua | `#94d2bd` | bright cyan |
+| Pearl Aqua | `#65dcb9` | bright cyan |
 | Stone Gray | `#6d787c` | bright black |
 | Marigold | `#febd5c` | bright yellow |
 | Warm Ivory | `#f6ebca` | bright white |

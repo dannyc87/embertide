@@ -24,10 +24,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PALETTE = {
     "Ink Black": "001219", "Vanilla Custard": "e9d8a6", "Golden Orange": "ee9b00",
     "Crimson Ember": "c23626", "Molten Rust": "da5b2d",
-    "Forest Kelly": "0a883d", "Neon Lime": "8fe259",
+    "Forest Kelly": "199647", "Neon Lime": "8fe259",
     "Azure": "00b4d8", "Sky Flash": "0ad6ff",
     "Electric Violet": "ab51e3", "Lilac Flash": "cf76ff",
-    "Lagoon Teal": "008388", "Pearl Aqua": "94d2bd",
+    "Lagoon Teal": "008388", "Pearl Aqua": "65dcb9",
     "Stone Gray": "6d787c", "Marigold": "febd5c", "Warm Ivory": "f6ebca",
     "Deep Indigo": "4376c2",
 }
@@ -40,12 +40,12 @@ FINAL = {
     "cursor": "ee9b00", "cursor_text": "001219",
     "selection_bg": "4376c2", "selection_fg": "e9d8a6",
 
-    "black": "001219", "red": "c23626", "green": "0a883d", "yellow": "ee9b00",
+    "black": "001219", "red": "c23626", "green": "199647", "yellow": "ee9b00",
     "blue": "00b4d8", "magenta": "ab51e3", "cyan": "008388", "white": "e9d8a6",
 
     "bright_black": "6d787c", "bright_red": "da5b2d", "bright_green": "8fe259",
     "bright_yellow": "febd5c", "bright_blue": "0ad6ff", "bright_magenta": "cf76ff",
-    "bright_cyan": "94d2bd", "bright_white": "f6ebca",
+    "bright_cyan": "65dcb9", "bright_white": "f6ebca",
 }
 
 ANSI_ORDER = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
