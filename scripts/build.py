@@ -23,8 +23,10 @@ SOURCE = {
 }
 
 # ---------------------------------------------------------------------------
-# Final palette — "Reef": moderate-chroma synthesized green/blue/magenta,
-# red and bright-black lifted just enough to clear contrast floors.
+# Final palette — "Reef": green is specified directly (a7c957 hand-picked
+# bright, 658014 hue-matched normal); blue and magenta are still OKLCH-
+# synthesized; red and bright-black are lifted just enough to clear
+# contrast floors.
 # ---------------------------------------------------------------------------
 FINAL = {
     "background": "001219", "foreground": "e9d8a6",

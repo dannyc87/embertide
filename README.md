@@ -1,7 +1,7 @@
 # EmberTide
 
-A dark terminal theme built from a 10-stop teal→ember gradient, with a synthesized
-green/blue/magenta so every ANSI slot actually looks different from the others.
+A dark terminal theme built from a 10-stop teal→ember gradient, with green, blue, and
+magenta specified or synthesized so every ANSI slot actually looks different from the others.
 
 ![Source palette](assets/palette.svg)
 
@@ -19,9 +19,12 @@ actually being distinguishable.
 
 This version (the **Reef** variant) fixes that instead of hiding it:
 
-- **Green, blue, and magenta are synthesized** — nearest source hue rotated in OKLCH to a
-  correct ANSI hue band (green ≈124°, blue ≈240°, magenta ≈335°), at moderate chroma so
-  they stay in the same tonal family as the rest of the palette.
+- **Blue and magenta are synthesized** — nearest source hue rotated in OKLCH to a correct
+  ANSI hue band (blue ≈240°, magenta ≈335°), at moderate chroma so they stay in the same
+  tonal family as the rest of the palette.
+- **Green is specified directly**, not synthesized — bright green (`#a7c957`) was hand-picked,
+  and normal green (`#658014`) was derived only to match its hue at 4.2:1 contrast, rather
+  than being generated from an arbitrary hue target like blue and magenta currently are.
 - **Red and bright-black are lifted** just enough to clear text-contrast floors against
   the `#001219` background — the original `#ae2012` red and `#9b2226` magenta sat at
   ~2.7:1 and ~2.4:1 contrast, both unreadable as body text.
