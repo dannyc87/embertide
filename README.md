@@ -1,9 +1,8 @@
 # EmberTide
 
-A dark terminal theme built from a 10-stop teal→ember gradient, with green, blue, and
-magenta specified or synthesized so every ANSI slot actually looks different from the others.
+A dark terminal theme built from a 10-stop teal→ember gradient.
 
-![Source palette](assets/palette.svg)
+![Palette](assets/palette.svg)
 
 ## Preview
 
@@ -26,11 +25,15 @@ This version (the **Reef** variant) fixes that instead of hiding it:
   pair (`#a7c957`, `#0ad6ff`) was hand-picked, and the normal color (`#658014`, `#00b4d8`)
   was derived only to match that hue at a passing contrast, rather than being generated
   from an arbitrary hue target like magenta currently is.
+- **Cyan is deepened**, not untouched — once blue moved to a vivid, light azure
+  (`#00b4d8`), the original Dark Cyan (`#0a9396`) sat too close to it in OKLab space to
+  read as clearly different. Cyan keeps its original hue but drops in lightness and
+  gains chroma (`#008388`, 4.2:1) to stay visually distinct.
 - **Red and bright-black are lifted** just enough to clear text-contrast floors against
   the `#001219` background — the original `#ae2012` red and `#9b2226` magenta sat at
   ~2.7:1 and ~2.4:1 contrast, both unreadable as body text.
-- **Background, foreground, yellow, cyan, white, cursor, and selection are untouched** —
-  they were already hue-accurate and high-contrast in the source palette.
+- **Background, foreground, yellow, white, cursor, and selection are untouched** — they
+  were already hue-accurate and high-contrast in the source palette.
 - **Contrast floors:** ≥3.5:1 for the normal row, ≥5:1 for the bright row, ≥2:1 for
   bright-black (which is meant to be dim, not readable body text).
 
@@ -167,7 +170,7 @@ into your user or workspace `settings.json`.
 | 3 | Yellow | `#ee9b00` | 8.5:1 |
 | 4 | Blue | `#00b4d8` | 7.7:1 |
 | 5 | Magenta | `#9b4e8c` | 3.5:1 |
-| 6 | Cyan | `#0a9396` | 5.1:1 |
+| 6 | Cyan | `#008388` | 4.2:1 |
 | 7 | White | `#e9d8a6` | 13.5:1 |
 
 ### ANSI — bright
@@ -187,7 +190,12 @@ White, bright yellow, and bright white are intentionally the same hex (`#e9d8a6`
 source palette's lightest stop, reused as the theme's neutral light color. Every other
 slot is unique.
 
-### Source palette
+### Palette
+
+Two groups: the original 10-stop source gradient, and the colors specified (or, for
+Lagoon Teal, adjusted) by hand for Reef rather than derived from a source stop.
+
+**Source (10-stop gradient)**
 
 | Name | Hex |
 |---|---|
@@ -201,6 +209,16 @@ slot is unique.
 | Rusty Spice | `#bb3e03` |
 | Oxidized Iron | `#ae2012` |
 | Brown Red | `#9b2226` |
+
+**Specified for Reef**
+
+| Name | Hex | Used as |
+|---|---|---|
+| Azure | `#00b4d8` | blue |
+| Sky Flash | `#0ad6ff` | bright blue |
+| Moss Green | `#658014` | green |
+| Spring Lime | `#a7c957` | bright green |
+| Lagoon Teal | `#008388` | cyan (deepened from Dark Cyan) |
 
 ## Regenerating
 

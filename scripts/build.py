@@ -23,8 +23,20 @@ SOURCE = {
 }
 
 # ---------------------------------------------------------------------------
+# Specified additions — colors picked (or, for Lagoon Teal, adjusted) by hand
+# for Reef rather than derived from a SOURCE stop. Documented separately so
+# the palette section can show what's original vs. what's been added.
+# ---------------------------------------------------------------------------
+SPECIFIED = {
+    "Azure": "00b4d8", "Sky Flash": "0ad6ff",
+    "Moss Green": "658014", "Spring Lime": "a7c957",
+    "Lagoon Teal": "008388",
+}
+
+# ---------------------------------------------------------------------------
 # Final palette — "Reef": green and blue are specified directly (hand-picked
-# bright + a hue-matched normal); magenta is still OKLCH-synthesized; red and
+# bright + a hue-matched normal); cyan is deepened/re-saturated to stay
+# distinct from the new blue; magenta is still OKLCH-synthesized; red and
 # bright-black are lifted just enough to clear contrast floors.
 # ---------------------------------------------------------------------------
 FINAL = {
@@ -33,7 +45,7 @@ FINAL = {
     "selection_bg": "005f73", "selection_fg": "e9d8a6",
 
     "black": "001219", "red": "c23626", "green": "658014", "yellow": "ee9b00",
-    "blue": "00b4d8", "magenta": "9b4e8c", "cyan": "0a9396", "white": "e9d8a6",
+    "blue": "00b4d8", "magenta": "9b4e8c", "cyan": "008388", "white": "e9d8a6",
 
     "bright_black": "384f57", "bright_red": "da5b2d", "bright_green": "a7c957",
     "bright_yellow": "e9d8a6", "bright_blue": "0ad6ff", "bright_magenta": "b767a7",
@@ -381,21 +393,35 @@ def svg_wrap(width, height, body, bg="#f5f1e6"):
             f'viewBox="0 0 {width} {height}">\n<rect width="{width}" height="{height}" fill="{bg}"/>\n{body}</svg>\n')
 
 def gen_palette_svg():
-    names = list(SOURCE.items())
-    cols, sw, gap, margin = len(names), 76, 12, 20
-    top_pad, label_h = 20, 34
+    sw, gap, margin = 76, 12, 20
+    header_h, label_h, row_gap = 20, 34, 26
+    cols = max(len(SOURCE), len(SPECIFIED))
     width = margin * 2 + cols * sw + (cols - 1) * gap
-    height = top_pad + sw + 10 + label_h + 16
-    parts = []
-    x = margin
-    for name, hexcol in names:
-        parts.append(f'<rect x="{x}" y="{top_pad}" width="{sw}" height="{sw}" rx="8" fill="#{hexcol}"/>')
-        parts.append(f'<text x="{x + sw/2}" y="{top_pad + sw + 22}" font-family="IBM Plex Sans, sans-serif" '
-                      f'font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">{name}</text>')
-        parts.append(f'<text x="{x + sw/2}" y="{top_pad + sw + 35}" font-family="IBM Plex Mono, monospace" '
-                      f'font-size="9" fill="#756c5b" text-anchor="middle">#{hexcol}</text>')
-        x += sw + gap
-    write("assets/palette.svg", svg_wrap(width, height, "\n".join(parts)))
+
+    def row(y, title, items):
+        parts = [f'<text x="{margin}" y="{y}" font-family="IBM Plex Mono, monospace" font-size="11" '
+                 f'fill="#756c5b" letter-spacing="1">{title}</text>']
+        sy = y + 10
+        x = margin
+        for name, hexcol in items.items():
+            parts.append(f'<rect x="{x}" y="{sy}" width="{sw}" height="{sw}" rx="8" fill="#{hexcol}"/>')
+            parts.append(f'<text x="{x + sw/2}" y="{sy + sw + 17}" font-family="IBM Plex Sans, sans-serif" '
+                          f'font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">{name}</text>')
+            parts.append(f'<text x="{x + sw/2}" y="{sy + sw + 30}" font-family="IBM Plex Mono, monospace" '
+                          f'font-size="9" fill="#756c5b" text-anchor="middle">#{hexcol}</text>')
+            x += sw + gap
+        return "\n".join(parts), sy + sw + label_h
+
+    y = 28
+    body = []
+    r, y2 = row(y, "SOURCE (10-STOP GRADIENT)", SOURCE)
+    body.append(r)
+    y = y2 + row_gap
+    r, y2 = row(y, "SPECIFIED FOR REEF", SPECIFIED)
+    body.append(r)
+    y = y2 + 8
+
+    write("assets/palette.svg", svg_wrap(width, y, "\n".join(body)))
 
 def gen_ansi_grid_svg():
     cols, sw, gap, margin = 8, 78, 12, 20

@@ -53,9 +53,9 @@
 	<key>Ansi 6 Color</key>
 	<dict>
 		<key>Color Space</key><string>sRGB</string>
-		<key>Red Component</key><real>0.039216</real>
-		<key>Green Component</key><real>0.576471</real>
-		<key>Blue Component</key><real>0.588235</real>
+		<key>Red Component</key><real>0.000000</real>
+		<key>Green Component</key><real>0.513725</real>
+		<key>Blue Component</key><real>0.533333</real>
 		<key>Alpha Component</key><real>1</real>
 	</dict>
 	<key>Ansi 7 Color</key>
