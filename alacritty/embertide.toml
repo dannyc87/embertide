@@ -1,4 +1,4 @@
-# EmberTide (Reef) — dark terminal theme for Alacritty
+# EmberTide — dark terminal theme for Alacritty
 # Save as ~/.config/alacritty/themes/embertide.toml, then in alacritty.toml:
 #   [general]
 #   import = ["~/.config/alacritty/themes/embertide.toml"]

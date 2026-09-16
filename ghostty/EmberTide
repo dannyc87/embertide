@@ -1,4 +1,4 @@
-# EmberTide (Reef) — dark terminal theme for Ghostty
+# EmberTide — dark terminal theme for Ghostty
 # Save as ~/.config/ghostty/themes/EmberTide (no extension — the filename
 # is the theme name), then in ~/.config/ghostty/config:
 #   theme = EmberTide

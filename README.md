@@ -16,7 +16,7 @@ green, blue, *and* bright-black — which breaks things like `ls` (directories v
 executables), git prompts, and diff highlighting, all of which depend on those colors
 actually being distinguishable.
 
-This version (the **Reef** variant) fixes that instead of hiding it:
+EmberTide fixes that instead of hiding it:
 
 - **Green, blue, and magenta are all specified directly**, not synthesized from an
   arbitrary hue target. In each pair, one color was hand-picked and the other derived
@@ -191,7 +191,7 @@ slot is unique.
 ### Palette
 
 Two groups: the original 10-stop source gradient, and the colors specified (or, for
-Lagoon Teal, adjusted) by hand for Reef rather than derived from a source stop.
+Lagoon Teal, adjusted) by hand rather than derived from a source stop.
 
 **Source (10-stop gradient)**
 
@@ -208,7 +208,7 @@ Lagoon Teal, adjusted) by hand for Reef rather than derived from a source stop.
 | Oxidized Iron | `#ae2012` |
 | Brown Red | `#9b2226` |
 
-**Specified for Reef**
+**Specified additions**
 
 | Name | Hex | Used as |
 |---|---|---|

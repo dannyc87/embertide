@@ -1,4 +1,4 @@
-# EmberTide (Reef) — tmux status bar & chrome theme
+# EmberTide — tmux status bar & chrome theme
 # tmux inherits its 16 ANSI colors from the underlying terminal emulator —
 # pair this with one of the terminal themes in this repo. This file only
 # themes tmux's own UI: status bar, pane borders, messages, copy mode.
