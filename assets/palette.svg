@@ -40,9 +40,9 @@
 <rect x="284" y="170" width="76" height="76" rx="8" fill="#65dcb9"/>
 <text x="322.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Pearl Aqua</text>
 <text x="322.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#65dcb9</text>
-<rect x="372" y="170" width="76" height="76" rx="8" fill="#6d787c"/>
+<rect x="372" y="170" width="76" height="76" rx="8" fill="#566165"/>
 <text x="410.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Stone Gray</text>
-<text x="410.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#6d787c</text>
+<text x="410.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#566165</text>
 <rect x="460" y="170" width="76" height="76" rx="8" fill="#febd5c"/>
 <text x="498.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Marigold</text>
 <text x="498.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#febd5c</text>

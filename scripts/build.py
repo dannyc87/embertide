@@ -28,7 +28,7 @@ PALETTE = {
     "Azure": "00b4d8", "Sky Flash": "0ad6ff",
     "Electric Violet": "ab51e3", "Lilac Flash": "cf76ff",
     "Lagoon Teal": "008388", "Pearl Aqua": "65dcb9",
-    "Stone Gray": "6d787c", "Marigold": "febd5c", "Warm Ivory": "f6ebca",
+    "Stone Gray": "566165", "Marigold": "febd5c", "Warm Ivory": "f6ebca",
     "Deep Indigo": "4376c2",
 }
 
@@ -43,7 +43,7 @@ FINAL = {
     "black": "001219", "red": "c23626", "green": "199647", "yellow": "ee9b00",
     "blue": "00b4d8", "magenta": "ab51e3", "cyan": "008388", "white": "e9d8a6",
 
-    "bright_black": "6d787c", "bright_red": "da5b2d", "bright_green": "8fe259",
+    "bright_black": "566165", "bright_red": "da5b2d", "bright_green": "8fe259",
     "bright_yellow": "febd5c", "bright_blue": "0ad6ff", "bright_magenta": "cf76ff",
     "bright_cyan": "65dcb9", "bright_white": "f6ebca",
 }
@@ -149,10 +149,19 @@ def verify():
 
     floors_bright = {"bright_red": 5.0, "bright_green": 5.0, "bright_blue": 5.0,
                       "bright_magenta": 5.0, "bright_yellow": 5.0, "bright_cyan": 5.0,
-                      "bright_white": 5.0, "bright_black": 3.5}
+                      "bright_white": 5.0, "bright_black": 2.9}
     for role, floor in floors_bright.items():
         cr = contrast(FINAL[role], bg)
         assert cr >= floor - 0.05, f"{role} contrast {cr:.2f} below floor {floor}"
+
+    # bright-black doubles as a background fill (e.g. Claude Code's active-prompt
+    # highlight bar), with foreground text drawn on top of it -- that pairing
+    # needs its own WCAG-AA floor, independent of bright-black's contrast against
+    # the main background above. This is what caught the original #6d787c
+    # (foreground-on-it was only 3.21:1, visibly hard to read).
+    fg_on_bright_black = contrast(FINAL["foreground"], FINAL["bright_black"])
+    assert fg_on_bright_black >= 4.5 - 0.05, (
+        f"foreground-on-bright_black contrast {fg_on_bright_black:.2f} below 4.5 floor")
 
     # Saturation consistency: the 12 hue-bearing accent roles (excludes
     # black/white/bright-black/bright-white, which are neutrals by design)
@@ -167,7 +176,8 @@ def verify():
         assert sat >= 0.65 - 0.01, f"{role} saturation {sat*100:.1f}% below 65% floor"
 
     print("verify: OK — 16/16 unique ANSI slots, all bright>normal, "
-          "contrast floors met (normal >=3.5:1, bright >=5:1, bright-black >=3.5:1), "
+          "contrast floors met (normal >=3.5:1, bright >=5:1, bright-black >=2.9:1 "
+          "vs background, foreground-on-bright-black >=4.5:1), "
           "accent saturation >=65% of gamut")
 
 # ---------------------------------------------------------------------------

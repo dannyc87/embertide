@@ -31,8 +31,12 @@ Colors are worked and checked in OKLCH (via OKLab), not sRGB directly, since per
 lightness and chroma are what actually determine how a color reads against a
 background — raw hex values don't.
 
-- **Contrast** — every normal-row ANSI color and bright-black clear ≥3.5:1 against the
-  `#001219` background; every other bright-row color clears ≥5:1.
+- **Contrast** — every normal-row ANSI color clears ≥3.5:1 against the `#001219`
+  background and every other bright-row color clears ≥5:1. Bright-black clears a lower
+  ≥2.9:1 against the background, because it also doubles as a *background fill* in some
+  UIs (Claude Code's active-prompt highlight bar is one) — what actually matters there
+  is foreground text drawn on top of it, which is checked separately and held to a
+  real ≥4.5:1 (the original `#6d787c` only managed 3.21:1 there, visibly hard to read).
 - **Hue separation** — neighboring accent colors are compared as OKLab distance (ΔE),
   not just hue angle, since two colors can share a hue and still read as distinct if
   their lightness or chroma differs enough — or sit far apart in hue and still look
@@ -190,7 +194,7 @@ companion repo generated from the same palette.
 
 | # | Role | Hex | Contrast vs. bg |
 |---|---|---|---|
-| 8 | Bright black | `#6d787c` | 4.2:1 |
+| 8 | Bright black | `#566165` | 3.0:1 |
 | 9 | Bright red | `#da5b2d` | 5.0:1 |
 | 10 | Bright green | `#8fe259` | 12.0:1 |
 | 11 | Bright yellow | `#febd5c` | 11.5:1 |
@@ -220,7 +224,7 @@ Every color the current theme actually uses, named:
 | Lilac Flash | `#cf76ff` | bright magenta |
 | Lagoon Teal | `#008388` | cyan |
 | Pearl Aqua | `#65dcb9` | bright cyan |
-| Stone Gray | `#6d787c` | bright black |
+| Stone Gray | `#566165` | bright black |
 | Marigold | `#febd5c` | bright yellow |
 | Warm Ivory | `#f6ebca` | bright white |
 | Deep Indigo | `#4376c2` | selection background |
@@ -239,8 +243,9 @@ The script asserts, before writing anything:
 
 - all 16 ANSI hexes are unique — no collisions, intentional or otherwise,
 - every bright color is lighter (higher OKLab L) than its normal counterpart,
-- every normal-row color (and bright-black) clears 3.5:1 contrast against the
-  background, and every other bright-row color clears 5:1,
+- every normal-row color clears 3.5:1 contrast against the background, every other
+  bright-row color clears 5:1, and bright-black clears 2.9:1 against the background
+  *and* 4.5:1 with foreground text drawn on top of it,
 - every hue-bearing accent color sits at ≥65% of the maximum chroma reachable at its
   own lightness and hue.
 

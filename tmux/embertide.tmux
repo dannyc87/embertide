@@ -11,7 +11,7 @@ set -g status-style "bg=#001219,fg=#e9d8a6"
 set -g status-left "#[bg=#ee9b00,fg=#001219,bold] #S #[bg=#001219,fg=#ee9b00]"
 set -g status-right "#[fg=#008388]%Y-%m-%d #[fg=#e9d8a6]%H:%M "
 set -g window-status-current-style "bg=#4376c2,fg=#e9d8a6,bold"
-set -g window-status-style "bg=#001219,fg=#6d787c"
+set -g window-status-style "bg=#001219,fg=#566165"
 
 set -g pane-border-style "fg=#4376c2"
 set -g pane-active-border-style "fg=#ee9b00"
