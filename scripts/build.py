@@ -23,10 +23,9 @@ SOURCE = {
 }
 
 # ---------------------------------------------------------------------------
-# Final palette — "Reef": green is specified directly (a7c957 hand-picked
-# bright, 658014 hue-matched normal); blue and magenta are still OKLCH-
-# synthesized; red and bright-black are lifted just enough to clear
-# contrast floors.
+# Final palette — "Reef": green and blue are specified directly (hand-picked
+# bright + a hue-matched normal); magenta is still OKLCH-synthesized; red and
+# bright-black are lifted just enough to clear contrast floors.
 # ---------------------------------------------------------------------------
 FINAL = {
     "background": "001219", "foreground": "e9d8a6",
@@ -34,10 +33,10 @@ FINAL = {
     "selection_bg": "005f73", "selection_fg": "e9d8a6",
 
     "black": "001219", "red": "c23626", "green": "658014", "yellow": "ee9b00",
-    "blue": "006faa", "magenta": "9b4e8c", "cyan": "0a9396", "white": "e9d8a6",
+    "blue": "00b4d8", "magenta": "9b4e8c", "cyan": "0a9396", "white": "e9d8a6",
 
     "bright_black": "384f57", "bright_red": "da5b2d", "bright_green": "a7c957",
-    "bright_yellow": "e9d8a6", "bright_blue": "1c8ac7", "bright_magenta": "b767a7",
+    "bright_yellow": "e9d8a6", "bright_blue": "0ad6ff", "bright_magenta": "b767a7",
     "bright_cyan": "94d2bd", "bright_white": "e9d8a6",
 }
 

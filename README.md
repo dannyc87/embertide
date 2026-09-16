@@ -19,12 +19,13 @@ actually being distinguishable.
 
 This version (the **Reef** variant) fixes that instead of hiding it:
 
-- **Blue and magenta are synthesized** — nearest source hue rotated in OKLCH to a correct
-  ANSI hue band (blue ≈240°, magenta ≈335°), at moderate chroma so they stay in the same
-  tonal family as the rest of the palette.
-- **Green is specified directly**, not synthesized — bright green (`#a7c957`) was hand-picked,
-  and normal green (`#658014`) was derived only to match its hue at 4.2:1 contrast, rather
-  than being generated from an arbitrary hue target like blue and magenta currently are.
+- **Magenta is synthesized** — nearest source hue rotated in OKLCH to a correct ANSI hue
+  band (≈335°), at moderate chroma so it stays in the same tonal family as the rest of
+  the palette.
+- **Green and blue are specified directly**, not synthesized — the bright color in each
+  pair (`#a7c957`, `#0ad6ff`) was hand-picked, and the normal color (`#658014`, `#00b4d8`)
+  was derived only to match that hue at a passing contrast, rather than being generated
+  from an arbitrary hue target like magenta currently is.
 - **Red and bright-black are lifted** just enough to clear text-contrast floors against
   the `#001219` background — the original `#ae2012` red and `#9b2226` magenta sat at
   ~2.7:1 and ~2.4:1 contrast, both unreadable as body text.
@@ -164,7 +165,7 @@ into your user or workspace `settings.json`.
 | 1 | Red | `#c23626` | 3.5:1 |
 | 2 | Green | `#658014` | 4.2:1 |
 | 3 | Yellow | `#ee9b00` | 8.5:1 |
-| 4 | Blue | `#006faa` | 3.5:1 |
+| 4 | Blue | `#00b4d8` | 7.7:1 |
 | 5 | Magenta | `#9b4e8c` | 3.5:1 |
 | 6 | Cyan | `#0a9396` | 5.1:1 |
 | 7 | White | `#e9d8a6` | 13.5:1 |
@@ -177,7 +178,7 @@ into your user or workspace `settings.json`.
 | 9 | Bright red | `#da5b2d` | 5.0:1 |
 | 10 | Bright green | `#a7c957` | 10.1:1 |
 | 11 | Bright yellow | `#e9d8a6` | 13.5:1 |
-| 12 | Bright blue | `#1c8ac7` | 5.0:1 |
+| 12 | Bright blue | `#0ad6ff` | 11.0:1 |
 | 13 | Bright magenta | `#b767a7` | 5.0:1 |
 | 14 | Bright cyan | `#94d2bd` | 11.1:1 |
 | 15 | Bright white | `#e9d8a6` | 13.5:1 |
