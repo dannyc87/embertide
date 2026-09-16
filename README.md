@@ -20,7 +20,7 @@ actually being distinguishable.
 This version (the **Reef** variant) fixes that instead of hiding it:
 
 - **Green, blue, and magenta are synthesized** — nearest source hue rotated in OKLCH to a
-  correct ANSI hue band (green ≈140°, blue ≈240°, magenta ≈335°), at moderate chroma so
+  correct ANSI hue band (green ≈132°, blue ≈240°, magenta ≈335°), at moderate chroma so
   they stay in the same tonal family as the rest of the palette.
 - **Red and bright-black are lifted** just enough to clear text-contrast floors against
   the `#001219` background — the original `#ae2012` red and `#9b2226` magenta sat at
@@ -159,7 +159,7 @@ into your user or workspace `settings.json`.
 |---|---|---|---|
 | 0 | Black | `#001219` | — |
 | 1 | Red | `#c23626` | 3.5:1 |
-| 2 | Green | `#387729` | 3.5:1 |
+| 2 | Green | `#558227` | 4.2:1 |
 | 3 | Yellow | `#ee9b00` | 8.5:1 |
 | 4 | Blue | `#006faa` | 3.5:1 |
 | 5 | Magenta | `#9b4e8c` | 3.5:1 |
@@ -172,7 +172,7 @@ into your user or workspace `settings.json`.
 |---|---|---|---|
 | 8 | Bright black | `#384f57` | 2.2:1 |
 | 9 | Bright red | `#da5b2d` | 5.0:1 |
-| 10 | Bright green | `#519143` | 5.0:1 |
+| 10 | Bright green | `#6f9d44` | 6.0:1 |
 | 11 | Bright yellow | `#e9d8a6` | 13.5:1 |
 | 12 | Bright blue | `#1c8ac7` | 5.0:1 |
 | 13 | Bright magenta | `#b767a7` | 5.0:1 |
