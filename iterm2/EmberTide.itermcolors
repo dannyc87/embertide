@@ -173,9 +173,9 @@
 	<key>Selection Color</key>
 	<dict>
 		<key>Color Space</key><string>sRGB</string>
-		<key>Red Component</key><real>0.000000</real>
-		<key>Green Component</key><real>0.372549</real>
-		<key>Blue Component</key><real>0.450980</real>
+		<key>Red Component</key><real>0.262745</real>
+		<key>Green Component</key><real>0.462745</real>
+		<key>Blue Component</key><real>0.760784</real>
 		<key>Alpha Component</key><real>1</real>
 	</dict>
 	<key>Selected Text Color</key>

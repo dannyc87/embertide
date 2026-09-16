@@ -1,64 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="908" height="302" viewBox="0 0 908 302">
-<rect width="908" height="302" fill="#f5f1e6"/>
-<text x="20" y="28" font-family="IBM Plex Mono, monospace" font-size="11" fill="#756c5b" letter-spacing="1">SOURCE (10-STOP GRADIENT)</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="288" viewBox="0 0 820 288">
+<rect width="820" height="288" fill="#f5f1e6"/>
+<text x="20" y="28" font-family="IBM Plex Mono, monospace" font-size="11" fill="#756c5b" letter-spacing="1">PALETTE (17 colors)</text>
 <rect x="20" y="38" width="76" height="76" rx="8" fill="#001219"/>
 <text x="58.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Ink Black</text>
 <text x="58.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#001219</text>
-<rect x="108" y="38" width="76" height="76" rx="8" fill="#005f73"/>
-<text x="146.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Dark Teal</text>
-<text x="146.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#005f73</text>
-<rect x="196" y="38" width="76" height="76" rx="8" fill="#0a9396"/>
-<text x="234.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Dark Cyan</text>
-<text x="234.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#0a9396</text>
-<rect x="284" y="38" width="76" height="76" rx="8" fill="#94d2bd"/>
-<text x="322.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Pearl Aqua</text>
-<text x="322.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#94d2bd</text>
-<rect x="372" y="38" width="76" height="76" rx="8" fill="#e9d8a6"/>
-<text x="410.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Vanilla Custard</text>
-<text x="410.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#e9d8a6</text>
-<rect x="460" y="38" width="76" height="76" rx="8" fill="#ee9b00"/>
-<text x="498.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Golden Orange</text>
-<text x="498.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#ee9b00</text>
-<rect x="548" y="38" width="76" height="76" rx="8" fill="#ca6702"/>
-<text x="586.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Burnt Caramel</text>
-<text x="586.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#ca6702</text>
-<rect x="636" y="38" width="76" height="76" rx="8" fill="#bb3e03"/>
-<text x="674.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Rusty Spice</text>
-<text x="674.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#bb3e03</text>
-<rect x="724" y="38" width="76" height="76" rx="8" fill="#ae2012"/>
-<text x="762.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Oxidized Iron</text>
-<text x="762.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#ae2012</text>
-<rect x="812" y="38" width="76" height="76" rx="8" fill="#9b2226"/>
-<text x="850.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Brown Red</text>
-<text x="850.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#9b2226</text>
-<text x="20" y="174" font-family="IBM Plex Mono, monospace" font-size="11" fill="#756c5b" letter-spacing="1">SPECIFIED ADDITIONS</text>
-<rect x="20" y="184" width="76" height="76" rx="8" fill="#00b4d8"/>
-<text x="58.0" y="277" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Azure</text>
-<text x="58.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#00b4d8</text>
-<rect x="108" y="184" width="76" height="76" rx="8" fill="#0ad6ff"/>
-<text x="146.0" y="277" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Sky Flash</text>
-<text x="146.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#0ad6ff</text>
-<rect x="196" y="184" width="76" height="76" rx="8" fill="#0a883d"/>
-<text x="234.0" y="277" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Forest Kelly</text>
-<text x="234.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#0a883d</text>
-<rect x="284" y="184" width="76" height="76" rx="8" fill="#8fe259"/>
-<text x="322.0" y="277" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Neon Lime</text>
-<text x="322.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#8fe259</text>
-<rect x="372" y="184" width="76" height="76" rx="8" fill="#ab51e3"/>
-<text x="410.0" y="277" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Electric Violet</text>
-<text x="410.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#ab51e3</text>
-<rect x="460" y="184" width="76" height="76" rx="8" fill="#cf76ff"/>
-<text x="498.0" y="277" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Lilac Flash</text>
-<text x="498.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#cf76ff</text>
-<rect x="548" y="184" width="76" height="76" rx="8" fill="#008388"/>
-<text x="586.0" y="277" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Lagoon Teal</text>
-<text x="586.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#008388</text>
-<rect x="636" y="184" width="76" height="76" rx="8" fill="#6d787c"/>
-<text x="674.0" y="277" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Stone Gray</text>
-<text x="674.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#6d787c</text>
-<rect x="724" y="184" width="76" height="76" rx="8" fill="#febd5c"/>
-<text x="762.0" y="277" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Marigold</text>
-<text x="762.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#febd5c</text>
-<rect x="812" y="184" width="76" height="76" rx="8" fill="#f6ebca"/>
-<text x="850.0" y="277" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Warm Ivory</text>
-<text x="850.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#f6ebca</text></svg>
+<rect x="108" y="38" width="76" height="76" rx="8" fill="#e9d8a6"/>
+<text x="146.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Vanilla Custard</text>
+<text x="146.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#e9d8a6</text>
+<rect x="196" y="38" width="76" height="76" rx="8" fill="#ee9b00"/>
+<text x="234.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Golden Orange</text>
+<text x="234.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#ee9b00</text>
+<rect x="284" y="38" width="76" height="76" rx="8" fill="#c23626"/>
+<text x="322.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Crimson Ember</text>
+<text x="322.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#c23626</text>
+<rect x="372" y="38" width="76" height="76" rx="8" fill="#da5b2d"/>
+<text x="410.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Molten Rust</text>
+<text x="410.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#da5b2d</text>
+<rect x="460" y="38" width="76" height="76" rx="8" fill="#0a883d"/>
+<text x="498.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Forest Kelly</text>
+<text x="498.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#0a883d</text>
+<rect x="548" y="38" width="76" height="76" rx="8" fill="#8fe259"/>
+<text x="586.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Neon Lime</text>
+<text x="586.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#8fe259</text>
+<rect x="636" y="38" width="76" height="76" rx="8" fill="#00b4d8"/>
+<text x="674.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Azure</text>
+<text x="674.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#00b4d8</text>
+<rect x="724" y="38" width="76" height="76" rx="8" fill="#0ad6ff"/>
+<text x="762.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Sky Flash</text>
+<text x="762.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#0ad6ff</text>
+<rect x="20" y="170" width="76" height="76" rx="8" fill="#ab51e3"/>
+<text x="58.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Electric Violet</text>
+<text x="58.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#ab51e3</text>
+<rect x="108" y="170" width="76" height="76" rx="8" fill="#cf76ff"/>
+<text x="146.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Lilac Flash</text>
+<text x="146.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#cf76ff</text>
+<rect x="196" y="170" width="76" height="76" rx="8" fill="#008388"/>
+<text x="234.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Lagoon Teal</text>
+<text x="234.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#008388</text>
+<rect x="284" y="170" width="76" height="76" rx="8" fill="#94d2bd"/>
+<text x="322.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Pearl Aqua</text>
+<text x="322.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#94d2bd</text>
+<rect x="372" y="170" width="76" height="76" rx="8" fill="#6d787c"/>
+<text x="410.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Stone Gray</text>
+<text x="410.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#6d787c</text>
+<rect x="460" y="170" width="76" height="76" rx="8" fill="#febd5c"/>
+<text x="498.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Marigold</text>
+<text x="498.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#febd5c</text>
+<rect x="548" y="170" width="76" height="76" rx="8" fill="#f6ebca"/>
+<text x="586.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Warm Ivory</text>
+<text x="586.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#f6ebca</text>
+<rect x="636" y="170" width="76" height="76" rx="8" fill="#4376c2"/>
+<text x="674.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Deep Indigo</text>
+<text x="674.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#4376c2</text></svg>

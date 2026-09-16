@@ -8,7 +8,7 @@ background = 001219
 foreground = e9d8a6
 cursor-color = ee9b00
 cursor-text = 001219
-selection-background = 005f73
+selection-background = 4376c2
 selection-foreground = e9d8a6
 bold-is-bright = true
 

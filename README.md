@@ -35,8 +35,12 @@ EmberTide fixes that instead of hiding it:
   invisible against the background (2.2:1). Bright black is now an actual neutral gray
   (`#6d787c`, 4.2:1) instead of a colored, barely-there tone; bright yellow (`#febd5c`)
   and bright white (`#f6ebca`) are each distinct from normal white and from each other.
-- **Background, foreground, yellow, white, cursor, and selection are untouched** — they
-  were already hue-accurate and high-contrast in the source palette.
+- **Selection background moved off the source gradient** — the original Dark Teal
+  (`#005f73`) sat at almost exactly blue's hue (218.7° vs. 219.0°) once blue became a
+  vivid azure, so it read as a muddy, darker blue rather than an intentional highlight.
+  Deep Indigo (`#4376c2`, 258°) sits in genuinely open hue territory instead.
+- **Background, foreground, yellow, white, and cursor are untouched** — they were
+  already hue-accurate and high-contrast in the source palette.
 - **Contrast floors:** ≥3.5:1 for the normal row and for bright-black (it needs to
   actually be visible, not just technically non-black), ≥5:1 for the rest of the
   bright row.
@@ -162,7 +166,7 @@ into your user or workspace `settings.json`.
 | Background | `#001219` |
 | Foreground | `#e9d8a6` |
 | Cursor | `#ee9b00` |
-| Selection background | `#005f73` |
+| Selection background | `#4376c2` |
 
 ### ANSI — normal
 
@@ -194,38 +198,30 @@ All 16 slots are unique.
 
 ### Palette
 
-Two groups: the original 10-stop source gradient, and the colors specified (or, for
-Lagoon Teal, adjusted) by hand rather than derived from a source stop.
-
-**Source (10-stop gradient)**
-
-| Name | Hex |
-|---|---|
-| Ink Black | `#001219` |
-| Dark Teal | `#005f73` |
-| Dark Cyan | `#0a9396` |
-| Pearl Aqua | `#94d2bd` |
-| Vanilla Custard | `#e9d8a6` |
-| Golden Orange | `#ee9b00` |
-| Burnt Caramel | `#ca6702` |
-| Rusty Spice | `#bb3e03` |
-| Oxidized Iron | `#ae2012` |
-| Brown Red | `#9b2226` |
-
-**Specified additions**
+EmberTide started from a 10-stop source gradient, but most of those stops have since
+been adjusted, replaced, or dropped — Dark Teal, Burnt Caramel, and Brown Red don't
+appear anywhere in the theme anymore. Rather than keep tracking "original" vs. "added,"
+every color the theme actually uses is named and listed together as one palette:
 
 | Name | Hex | Used as |
 |---|---|---|
-| Azure | `#00b4d8` | blue |
-| Sky Flash | `#0ad6ff` | bright blue |
+| Ink Black | `#001219` | background, black |
+| Vanilla Custard | `#e9d8a6` | foreground, white, selection text |
+| Golden Orange | `#ee9b00` | cursor, yellow |
+| Crimson Ember | `#c23626` | red |
+| Molten Rust | `#da5b2d` | bright red |
 | Forest Kelly | `#0a883d` | green |
 | Neon Lime | `#8fe259` | bright green |
+| Azure | `#00b4d8` | blue |
+| Sky Flash | `#0ad6ff` | bright blue |
 | Electric Violet | `#ab51e3` | magenta |
 | Lilac Flash | `#cf76ff` | bright magenta |
-| Lagoon Teal | `#008388` | cyan (deepened from Dark Cyan) |
+| Lagoon Teal | `#008388` | cyan |
+| Pearl Aqua | `#94d2bd` | bright cyan |
 | Stone Gray | `#6d787c` | bright black |
 | Marigold | `#febd5c` | bright yellow |
 | Warm Ivory | `#f6ebca` | bright white |
+| Deep Indigo | `#4376c2` | selection background |
 
 ## Regenerating
 

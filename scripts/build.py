@@ -13,39 +13,32 @@ import os
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # ---------------------------------------------------------------------------
-# Source palette (the 10 colors the theme is built from)
+# The palette: every distinct color the theme actually uses, named, as one
+# set. Earlier revisions split this into "source" (the original 10-stop
+# gradient) and "specified" (hand-picked additions), but that distinction
+# stopped meaning much once most of the original 10 had been adjusted,
+# replaced, or dropped entirely — Dark Teal, Burnt Caramel, and Brown Red
+# no longer appear anywhere in FINAL below. Treating everything as one
+# palette is what makes an honest intensity/consistency pass possible.
 # ---------------------------------------------------------------------------
-SOURCE = {
-    "Ink Black": "001219", "Dark Teal": "005f73", "Dark Cyan": "0a9396",
-    "Pearl Aqua": "94d2bd", "Vanilla Custard": "e9d8a6", "Golden Orange": "ee9b00",
-    "Burnt Caramel": "ca6702", "Rusty Spice": "bb3e03", "Oxidized Iron": "ae2012",
-    "Brown Red": "9b2226",
-}
-
-# ---------------------------------------------------------------------------
-# Specified additions — colors picked (or, for Lagoon Teal, adjusted) by hand
-# rather than derived from a SOURCE stop. Documented separately so the
-# palette section can show what's original vs. what's been added.
-# ---------------------------------------------------------------------------
-SPECIFIED = {
-    "Azure": "00b4d8", "Sky Flash": "0ad6ff",
+PALETTE = {
+    "Ink Black": "001219", "Vanilla Custard": "e9d8a6", "Golden Orange": "ee9b00",
+    "Crimson Ember": "c23626", "Molten Rust": "da5b2d",
     "Forest Kelly": "0a883d", "Neon Lime": "8fe259",
+    "Azure": "00b4d8", "Sky Flash": "0ad6ff",
     "Electric Violet": "ab51e3", "Lilac Flash": "cf76ff",
-    "Lagoon Teal": "008388",
+    "Lagoon Teal": "008388", "Pearl Aqua": "94d2bd",
     "Stone Gray": "6d787c", "Marigold": "febd5c", "Warm Ivory": "f6ebca",
+    "Deep Indigo": "4376c2",
 }
 
 # ---------------------------------------------------------------------------
-# Final palette: green, blue, and magenta are specified directly (hand-picked
-# bright + a hue-matched normal/derived bright); cyan is deepened/re-saturated
-# to stay distinct from the new blue; red is lifted just enough to clear its
-# contrast floor; bright-black, bright-yellow, and bright-white are specified
-# as real distinct colors instead of collapsing onto black/white.
+# Final palette: every ANSI slot and special role, assembled from PALETTE.
 # ---------------------------------------------------------------------------
 FINAL = {
     "background": "001219", "foreground": "e9d8a6",
     "cursor": "ee9b00", "cursor_text": "001219",
-    "selection_bg": "005f73", "selection_fg": "e9d8a6",
+    "selection_bg": "4376c2", "selection_fg": "e9d8a6",
 
     "black": "001219", "red": "c23626", "green": "0a883d", "yellow": "ee9b00",
     "blue": "00b4d8", "magenta": "ab51e3", "cyan": "008388", "white": "e9d8a6",
@@ -392,34 +385,28 @@ def svg_wrap(width, height, body, bg="#f5f1e6"):
 
 def gen_palette_svg():
     sw, gap, margin = 76, 12, 20
-    header_h, label_h, row_gap = 20, 34, 26
-    cols = max(len(SOURCE), len(SPECIFIED))
-    width = margin * 2 + cols * sw + (cols - 1) * gap
+    label_h, row_gap, per_row = 34, 22, 9
+    width = margin * 2 + per_row * sw + (per_row - 1) * gap
 
-    def row(y, title, items):
-        parts = [f'<text x="{margin}" y="{y}" font-family="IBM Plex Mono, monospace" font-size="11" '
-                 f'fill="#756c5b" letter-spacing="1">{title}</text>']
-        sy = y + 10
+    items = list(PALETTE.items())
+    rows = [items[i:i + per_row] for i in range(0, len(items), per_row)]
+
+    parts = [f'<text x="{margin}" y="28" font-family="IBM Plex Mono, monospace" font-size="11" '
+             f'fill="#756c5b" letter-spacing="1">PALETTE ({len(items)} colors)</text>']
+    y = 38
+    for row_items in rows:
         x = margin
-        for name, hexcol in items.items():
-            parts.append(f'<rect x="{x}" y="{sy}" width="{sw}" height="{sw}" rx="8" fill="#{hexcol}"/>')
-            parts.append(f'<text x="{x + sw/2}" y="{sy + sw + 17}" font-family="IBM Plex Sans, sans-serif" '
+        for name, hexcol in row_items:
+            parts.append(f'<rect x="{x}" y="{y}" width="{sw}" height="{sw}" rx="8" fill="#{hexcol}"/>')
+            parts.append(f'<text x="{x + sw/2}" y="{y + sw + 17}" font-family="IBM Plex Sans, sans-serif" '
                           f'font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">{name}</text>')
-            parts.append(f'<text x="{x + sw/2}" y="{sy + sw + 30}" font-family="IBM Plex Mono, monospace" '
+            parts.append(f'<text x="{x + sw/2}" y="{y + sw + 30}" font-family="IBM Plex Mono, monospace" '
                           f'font-size="9" fill="#756c5b" text-anchor="middle">#{hexcol}</text>')
             x += sw + gap
-        return "\n".join(parts), sy + sw + label_h
+        y += sw + label_h + row_gap
+    y = y - row_gap + 8
 
-    y = 28
-    body = []
-    r, y2 = row(y, "SOURCE (10-STOP GRADIENT)", SOURCE)
-    body.append(r)
-    y = y2 + row_gap
-    r, y2 = row(y, "SPECIFIED ADDITIONS", SPECIFIED)
-    body.append(r)
-    y = y2 + 8
-
-    write("assets/palette.svg", svg_wrap(width, y, "\n".join(body)))
+    write("assets/palette.svg", svg_wrap(width, y, "\n".join(parts)))
 
 def gen_ansi_grid_svg():
     cols, sw, gap, margin = 8, 78, 12, 20
