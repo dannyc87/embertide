@@ -31,10 +31,10 @@ FINAL = {
     "cursor": "ee9b00", "cursor_text": "001219",
     "selection_bg": "005f73", "selection_fg": "e9d8a6",
 
-    "black": "001219", "red": "c23626", "green": "558227", "yellow": "ee9b00",
+    "black": "001219", "red": "c23626", "green": "658014", "yellow": "ee9b00",
     "blue": "006faa", "magenta": "9b4e8c", "cyan": "0a9396", "white": "e9d8a6",
 
-    "bright_black": "384f57", "bright_red": "da5b2d", "bright_green": "6f9d44",
+    "bright_black": "384f57", "bright_red": "da5b2d", "bright_green": "a7c957",
     "bright_yellow": "e9d8a6", "bright_blue": "1c8ac7", "bright_magenta": "b767a7",
     "bright_cyan": "94d2bd", "bright_white": "e9d8a6",
 }
