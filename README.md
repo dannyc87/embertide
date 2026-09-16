@@ -157,7 +157,10 @@ with one of the terminal themes above for the pane content, not just the status 
 ### VS Code integrated terminal
 
 Merge the `workbench.colorCustomizations` block from `vscode/embertide.settings.json`
-into your user or workspace `settings.json`.
+into your user or workspace `settings.json`. For a full editor theme (workbench UI and
+syntax highlighting, not just the terminal panel), see
+[dannyc87/embertide-vscode](https://github.com/dannyc87/embertide-vscode) instead — a
+companion repo generated from the same palette.
 
 ## Color reference
 
