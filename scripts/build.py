@@ -72,13 +72,60 @@ def contrast(hex1, hex2):
     hi, lo = max(l1, l2), min(l1, l2)
     return (hi + 0.05) / (lo + 0.05)
 
-def oklab_L(hex_color):
+def rgb_to_oklab(hex_color):
     r, g, b = (srgb_to_linear(c) for c in hex_to_rgb01(hex_color))
     l = 0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b
     m = 0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b
     s = 0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b
     l_, m_, s_ = (x ** (1 / 3) if x >= 0 else -((-x) ** (1 / 3)) for x in (l, m, s))
-    return 0.2104542553 * l_ + 0.7936177850 * m_ - 0.0040720468 * s_
+    L = 0.2104542553 * l_ + 0.7936177850 * m_ - 0.0040720468 * s_
+    a = 1.9779984951 * l_ - 2.4285922050 * m_ + 0.4505937099 * s_
+    b2 = 0.0259040371 * l_ + 0.7827717662 * m_ - 0.8086757660 * s_
+    return L, a, b2
+
+def oklab_L(hex_color):
+    return rgb_to_oklab(hex_color)[0]
+
+def linear_to_srgb_raw(c):
+    # unclamped -- needed to detect out-of-gamut values, unlike the display path
+    sign, c = (1, c) if c >= 0 else (-1, -c)
+    v = 12.92 * c if c <= 0.0031308 else 1.055 * (c ** (1 / 2.4)) - 0.055
+    return sign * v
+
+def oklab_to_rgb01_raw(L, a, b):
+    l_ = L + 0.3963377774 * a + 0.2158037573 * b
+    m_ = L - 0.1055613458 * a - 0.0638541728 * b
+    s_ = L - 0.0894841775 * a - 1.2914855480 * b
+    l, m, s = l_ ** 3, m_ ** 3, s_ ** 3
+    r = +4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s
+    g = -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s
+    b3 = -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s
+    return (linear_to_srgb_raw(r), linear_to_srgb_raw(g), linear_to_srgb_raw(b3))
+
+def in_gamut(L, C, H):
+    a, b = C * math.cos(math.radians(H)), C * math.sin(math.radians(H))
+    return all(-1e-4 <= c <= 1 + 1e-4 for c in oklab_to_rgb01_raw(L, a, b))
+
+def max_chroma(L, H, hi_start=0.5):
+    if in_gamut(L, hi_start, H):
+        return hi_start
+    lo, hi = 0.0, hi_start
+    for _ in range(40):
+        mid = (lo + hi) / 2
+        lo, hi = (mid, hi) if in_gamut(L, mid, H) else (lo, mid)
+    return lo
+
+def saturation_ratio(hex_color):
+    """Chroma as a fraction of the max chroma reachable at this exact L,H --
+    i.e. how close to the sRGB gamut edge a color sits. This is what actually
+    separates "neon" from "pastel," independent of how light or dark the
+    color is (unlike raw chroma, which shrinks near black and white anyway).
+    """
+    L, a, b = rgb_to_oklab(hex_color)
+    C = math.hypot(a, b)
+    H = math.degrees(math.atan2(b, a)) % 360
+    cmax = max_chroma(L, H)
+    return C / cmax if cmax > 0 else 0.0
 
 def verify():
     bg = FINAL["background"]
@@ -107,8 +154,21 @@ def verify():
         cr = contrast(FINAL[role], bg)
         assert cr >= floor - 0.05, f"{role} contrast {cr:.2f} below floor {floor}"
 
+    # Saturation consistency: the 12 hue-bearing accent roles (excludes
+    # black/white/bright-black/bright-white, which are neutrals by design)
+    # must sit reasonably close to the sRGB gamut edge for their own L,H, so
+    # nothing reads as unintentionally "pastel" next to everything else's
+    # "neon." 65% floor gives headroom below the current worst case (~75%).
+    accent_roles = ["red", "green", "yellow", "blue", "magenta", "cyan",
+                     "bright_red", "bright_green", "bright_yellow",
+                     "bright_blue", "bright_magenta", "bright_cyan"]
+    for role in accent_roles:
+        sat = saturation_ratio(FINAL[role])
+        assert sat >= 0.65 - 0.01, f"{role} saturation {sat*100:.1f}% below 65% floor"
+
     print("verify: OK — 16/16 unique ANSI slots, all bright>normal, "
-          "contrast floors met (normal >=3.5:1, bright >=5:1, bright-black >=3.5:1)")
+          "contrast floors met (normal >=3.5:1, bright >=5:1, bright-black >=3.5:1), "
+          "accent saturation >=65% of gamut")
 
 # ---------------------------------------------------------------------------
 # Generators — one function per terminal, all reading from FINAL

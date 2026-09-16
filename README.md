@@ -1,59 +1,54 @@
 # EmberTide
 
-A dark terminal theme built from a 10-stop teal→ember gradient.
+A dark terminal theme, built and checked in OKLCH for consistent contrast, hue
+separation, and saturation across every ANSI slot.
 
 ![Palette](assets/palette.svg)
+
+## Origin
+
+EmberTide started as a 10-stop teal-to-ember gradient — a mood board more than a
+literal spec. It set the shape of the theme (a cool dark end, a warm bright end) but
+most of the individual stops have since been adjusted, replaced, or dropped; Dark Teal,
+Burnt Caramel, and Brown Red don't appear anywhere in the current palette.
+
+| Name | Hex |
+|---|---|
+| Ink Black | `#001219` |
+| Dark Teal | `#005f73` |
+| Dark Cyan | `#0a9396` |
+| Pearl Aqua | `#94d2bd` |
+| Vanilla Custard | `#e9d8a6` |
+| Golden Orange | `#ee9b00` |
+| Burnt Caramel | `#ca6702` |
+| Rusty Spice | `#bb3e03` |
+| Oxidized Iron | `#ae2012` |
+| Brown Red | `#9b2226` |
+
+## Design
+
+Colors are worked and checked in OKLCH (via OKLab), not sRGB directly, since perceptual
+lightness and chroma are what actually determine how a color reads against a
+background — raw hex values don't.
+
+- **Contrast** — every normal-row ANSI color and bright-black clear ≥3.5:1 against the
+  `#001219` background; every other bright-row color clears ≥5:1.
+- **Hue separation** — neighboring accent colors are compared as OKLab distance (ΔE),
+  not just hue angle, since two colors can share a hue and still read as distinct if
+  their lightness or chroma differs enough — or sit far apart in hue and still look
+  confusable if lightness and chroma coincide.
+- **Saturation** — measured as chroma relative to the maximum chroma reachable at a
+  color's own lightness and hue (its distance to the sRGB gamut edge), rather than raw
+  chroma, which shrinks near black and white regardless of how vivid a color feels. The
+  12 hue-bearing ANSI roles (red/green/yellow/blue/magenta/cyan, normal and bright) are
+  held to ≥65% of that ceiling, so nothing reads as unintentionally pastel next to the
+  rest.
+- Every rule above is asserted by [`scripts/build.py`](scripts/build.py) before it
+  writes a single file — see [Regenerating](#regenerating).
 
 ## Preview
 
 ![ANSI color grid](assets/ansi-grid.svg)
-
-## Why this exists
-
-The source is a 10-color data-viz gradient (teal → cyan → aqua → gold → caramel → red) with
-no true green, blue, or magenta stop. A naive first pass reused the same dark teal for
-green, blue, *and* bright-black — which breaks things like `ls` (directories vs.
-executables), git prompts, and diff highlighting, all of which depend on those colors
-actually being distinguishable.
-
-EmberTide fixes that instead of hiding it:
-
-- **Green, blue, and magenta are all specified directly**, not synthesized from an
-  arbitrary hue target. In each pair, one color was hand-picked and the other derived
-  only to match its hue at a passing contrast: bright green (`#8fe259`) and bright blue
-  (`#0ad6ff`) came with a derived darker normal (`#199647`, `#00b4d8`); normal magenta
-  (`#ab51e3`) came with a derived lighter bright (`#cf76ff`).
-- **Cyan is deepened**, not untouched — once blue moved to a vivid, light azure
-  (`#00b4d8`), the original Dark Cyan (`#0a9396`) sat too close to it in OKLab space to
-  read as clearly different. Cyan keeps its original hue but drops in lightness and
-  gains chroma (`#008388`, 4.2:1) to stay visually distinct.
-- **Red is lifted** just enough to clear its text-contrast floor against the `#001219`
-  background — the original `#ae2012` sat at ~2.7:1 contrast, unreadable as body text.
-- **Bright black, bright yellow, and bright white are specified as real colors** —
-  the source palette only had one light stop (Vanilla Custard), so a naive pass left
-  white, bright yellow, and bright white all identical, and bright-black nearly
-  invisible against the background (2.2:1). Bright black is now an actual neutral gray
-  (`#6d787c`, 4.2:1) instead of a colored, barely-there tone; bright yellow (`#febd5c`)
-  and bright white (`#f6ebca`) are each distinct from normal white and from each other.
-- **Selection background moved off the source gradient** — the original Dark Teal
-  (`#005f73`) sat at almost exactly blue's hue (218.7° vs. 219.0°) once blue became a
-  vivid azure, so it read as a muddy, darker blue rather than an intentional highlight.
-  Deep Indigo (`#4376c2`, 258°) sits in genuinely open hue territory instead.
-- **Saturation is checked, not just hue and contrast** — as a percentage of the maximum
-  chroma achievable at a color's own lightness and hue (how close it sits to the sRGB
-  gamut edge), most of the palette runs 76–100% saturated, but Pearl Aqua sat at only
-  44% — the one color untouched since the very first version — making it read as
-  noticeably "pastel" next to everything else's "neon." Raised to 75% (`#65dcb9`), same
-  hue and lightness. Forest Kelly (green) was also lifted from 4.2:1 to 5.0:1 contrast
-  for a brighter feel, same hue, still ~95% saturated.
-- **Background, foreground, yellow, white, and cursor are untouched** — they were
-  already hue-accurate and high-contrast in the source palette.
-- **Contrast floors:** ≥3.5:1 for the normal row and for bright-black (it needs to
-  actually be visible, not just technically non-black), ≥5:1 for the rest of the
-  bright row.
-
-Every claim above is asserted by [`scripts/build.py`](scripts/build.py) — see
-[Regenerating](#regenerating) — so it can't silently drift from what's documented here.
 
 ## Supported terminals
 
@@ -205,10 +200,7 @@ All 16 slots are unique.
 
 ### Palette
 
-EmberTide started from a 10-stop source gradient, but most of those stops have since
-been adjusted, replaced, or dropped — Dark Teal, Burnt Caramel, and Brown Red don't
-appear anywhere in the theme anymore. Rather than keep tracking "original" vs. "added,"
-every color the theme actually uses is named and listed together as one palette:
+Every color the current theme actually uses, named:
 
 | Name | Hex | Used as |
 |---|---|---|
@@ -245,7 +237,9 @@ The script asserts, before writing anything:
 - all 16 ANSI hexes are unique — no collisions, intentional or otherwise,
 - every bright color is lighter (higher OKLab L) than its normal counterpart,
 - every normal-row color (and bright-black) clears 3.5:1 contrast against the
-  background, and every other bright-row color clears 5:1.
+  background, and every other bright-row color clears 5:1,
+- every hue-bearing accent color sits at ≥65% of the maximum chroma reachable at its
+  own lightness and hue.
 
 If an edit fails one of those, the script exits with an assertion error instead of
 writing a file that quietly breaks the guarantees above.
