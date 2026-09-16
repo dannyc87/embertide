@@ -29,14 +29,15 @@ SOURCE = {
 # ---------------------------------------------------------------------------
 SPECIFIED = {
     "Azure": "00b4d8", "Sky Flash": "0ad6ff",
-    "Moss Green": "658014", "Spring Lime": "a7c957",
+    "Forest Kelly": "0a883d", "Neon Lime": "8fe259",
+    "Electric Violet": "ab51e3", "Lilac Flash": "cf76ff",
     "Lagoon Teal": "008388",
 }
 
 # ---------------------------------------------------------------------------
-# Final palette — "Reef": green and blue are specified directly (hand-picked
-# bright + a hue-matched normal); cyan is deepened/re-saturated to stay
-# distinct from the new blue; magenta is still OKLCH-synthesized; red and
+# Final palette — "Reef": green, blue, and magenta are specified directly
+# (hand-picked bright + a hue-matched normal/derived bright); cyan is
+# deepened/re-saturated to stay distinct from the new blue; red and
 # bright-black are lifted just enough to clear contrast floors.
 # ---------------------------------------------------------------------------
 FINAL = {
@@ -44,11 +45,11 @@ FINAL = {
     "cursor": "ee9b00", "cursor_text": "001219",
     "selection_bg": "005f73", "selection_fg": "e9d8a6",
 
-    "black": "001219", "red": "c23626", "green": "658014", "yellow": "ee9b00",
-    "blue": "00b4d8", "magenta": "9b4e8c", "cyan": "008388", "white": "e9d8a6",
+    "black": "001219", "red": "c23626", "green": "0a883d", "yellow": "ee9b00",
+    "blue": "00b4d8", "magenta": "ab51e3", "cyan": "008388", "white": "e9d8a6",
 
-    "bright_black": "384f57", "bright_red": "da5b2d", "bright_green": "a7c957",
-    "bright_yellow": "e9d8a6", "bright_blue": "0ad6ff", "bright_magenta": "b767a7",
+    "bright_black": "384f57", "bright_red": "da5b2d", "bright_green": "8fe259",
+    "bright_yellow": "e9d8a6", "bright_blue": "0ad6ff", "bright_magenta": "cf76ff",
     "bright_cyan": "94d2bd", "bright_white": "e9d8a6",
 }
 

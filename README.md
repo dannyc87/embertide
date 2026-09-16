@@ -18,13 +18,11 @@ actually being distinguishable.
 
 This version (the **Reef** variant) fixes that instead of hiding it:
 
-- **Magenta is synthesized** — nearest source hue rotated in OKLCH to a correct ANSI hue
-  band (≈335°), at moderate chroma so it stays in the same tonal family as the rest of
-  the palette.
-- **Green and blue are specified directly**, not synthesized — the bright color in each
-  pair (`#a7c957`, `#0ad6ff`) was hand-picked, and the normal color (`#658014`, `#00b4d8`)
-  was derived only to match that hue at a passing contrast, rather than being generated
-  from an arbitrary hue target like magenta currently is.
+- **Green, blue, and magenta are all specified directly**, not synthesized from an
+  arbitrary hue target. In each pair, one color was hand-picked and the other derived
+  only to match its hue at a passing contrast: bright green (`#8fe259`) and bright blue
+  (`#0ad6ff`) came with a derived darker normal (`#0a883d`, `#00b4d8`); normal magenta
+  (`#ab51e3`) came with a derived lighter bright (`#cf76ff`).
 - **Cyan is deepened**, not untouched — once blue moved to a vivid, light azure
   (`#00b4d8`), the original Dark Cyan (`#0a9396`) sat too close to it in OKLab space to
   read as clearly different. Cyan keeps its original hue but drops in lightness and
@@ -166,10 +164,10 @@ into your user or workspace `settings.json`.
 |---|---|---|---|
 | 0 | Black | `#001219` | — |
 | 1 | Red | `#c23626` | 3.5:1 |
-| 2 | Green | `#658014` | 4.2:1 |
+| 2 | Green | `#0a883d` | 4.2:1 |
 | 3 | Yellow | `#ee9b00` | 8.5:1 |
 | 4 | Blue | `#00b4d8` | 7.7:1 |
-| 5 | Magenta | `#9b4e8c` | 3.5:1 |
+| 5 | Magenta | `#ab51e3` | 4.6:1 |
 | 6 | Cyan | `#008388` | 4.2:1 |
 | 7 | White | `#e9d8a6` | 13.5:1 |
 
@@ -179,10 +177,10 @@ into your user or workspace `settings.json`.
 |---|---|---|---|
 | 8 | Bright black | `#384f57` | 2.2:1 |
 | 9 | Bright red | `#da5b2d` | 5.0:1 |
-| 10 | Bright green | `#a7c957` | 10.1:1 |
+| 10 | Bright green | `#8fe259` | 12.0:1 |
 | 11 | Bright yellow | `#e9d8a6` | 13.5:1 |
 | 12 | Bright blue | `#0ad6ff` | 11.0:1 |
-| 13 | Bright magenta | `#b767a7` | 5.0:1 |
+| 13 | Bright magenta | `#cf76ff` | 7.0:1 |
 | 14 | Bright cyan | `#94d2bd` | 11.1:1 |
 | 15 | Bright white | `#e9d8a6` | 13.5:1 |
 
@@ -216,8 +214,10 @@ Lagoon Teal, adjusted) by hand for Reef rather than derived from a source stop.
 |---|---|---|
 | Azure | `#00b4d8` | blue |
 | Sky Flash | `#0ad6ff` | bright blue |
-| Moss Green | `#658014` | green |
-| Spring Lime | `#a7c957` | bright green |
+| Forest Kelly | `#0a883d` | green |
+| Neon Lime | `#8fe259` | bright green |
+| Electric Violet | `#ab51e3` | magenta |
+| Lilac Flash | `#cf76ff` | bright magenta |
 | Lagoon Teal | `#008388` | cyan (deepened from Dark Cyan) |
 
 ## Regenerating
