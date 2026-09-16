@@ -27,13 +27,19 @@ EmberTide fixes that instead of hiding it:
   (`#00b4d8`), the original Dark Cyan (`#0a9396`) sat too close to it in OKLab space to
   read as clearly different. Cyan keeps its original hue but drops in lightness and
   gains chroma (`#008388`, 4.2:1) to stay visually distinct.
-- **Red and bright-black are lifted** just enough to clear text-contrast floors against
-  the `#001219` background — the original `#ae2012` red and `#9b2226` magenta sat at
-  ~2.7:1 and ~2.4:1 contrast, both unreadable as body text.
+- **Red is lifted** just enough to clear its text-contrast floor against the `#001219`
+  background — the original `#ae2012` sat at ~2.7:1 contrast, unreadable as body text.
+- **Bright black, bright yellow, and bright white are specified as real colors** —
+  the source palette only had one light stop (Vanilla Custard), so a naive pass left
+  white, bright yellow, and bright white all identical, and bright-black nearly
+  invisible against the background (2.2:1). Bright black is now an actual neutral gray
+  (`#6d787c`, 4.2:1) instead of a colored, barely-there tone; bright yellow (`#febd5c`)
+  and bright white (`#f6ebca`) are each distinct from normal white and from each other.
 - **Background, foreground, yellow, white, cursor, and selection are untouched** — they
   were already hue-accurate and high-contrast in the source palette.
-- **Contrast floors:** ≥3.5:1 for the normal row, ≥5:1 for the bright row, ≥2:1 for
-  bright-black (which is meant to be dim, not readable body text).
+- **Contrast floors:** ≥3.5:1 for the normal row and for bright-black (it needs to
+  actually be visible, not just technically non-black), ≥5:1 for the rest of the
+  bright row.
 
 Every claim above is asserted by [`scripts/build.py`](scripts/build.py) — see
 [Regenerating](#regenerating) — so it can't silently drift from what's documented here.
@@ -175,18 +181,16 @@ into your user or workspace `settings.json`.
 
 | # | Role | Hex | Contrast vs. bg |
 |---|---|---|---|
-| 8 | Bright black | `#384f57` | 2.2:1 |
+| 8 | Bright black | `#6d787c` | 4.2:1 |
 | 9 | Bright red | `#da5b2d` | 5.0:1 |
 | 10 | Bright green | `#8fe259` | 12.0:1 |
-| 11 | Bright yellow | `#e9d8a6` | 13.5:1 |
+| 11 | Bright yellow | `#febd5c` | 11.5:1 |
 | 12 | Bright blue | `#0ad6ff` | 11.0:1 |
 | 13 | Bright magenta | `#cf76ff` | 7.0:1 |
 | 14 | Bright cyan | `#94d2bd` | 11.1:1 |
-| 15 | Bright white | `#e9d8a6` | 13.5:1 |
+| 15 | Bright white | `#f6ebca` | 16.0:1 |
 
-White, bright yellow, and bright white are intentionally the same hex (`#e9d8a6`) — the
-source palette's lightest stop, reused as the theme's neutral light color. Every other
-slot is unique.
+All 16 slots are unique.
 
 ### Palette
 
@@ -219,6 +223,9 @@ Lagoon Teal, adjusted) by hand rather than derived from a source stop.
 | Electric Violet | `#ab51e3` | magenta |
 | Lilac Flash | `#cf76ff` | bright magenta |
 | Lagoon Teal | `#008388` | cyan (deepened from Dark Cyan) |
+| Stone Gray | `#6d787c` | bright black |
+| Marigold | `#febd5c` | bright yellow |
+| Warm Ivory | `#f6ebca` | bright white |
 
 ## Regenerating
 
@@ -232,11 +239,10 @@ python3 scripts/build.py
 
 The script asserts, before writing anything:
 
-- no unexpected ANSI slot collisions (the white/bright-yellow/bright-white group is the
-  one intentional exception),
+- all 16 ANSI hexes are unique — no collisions, intentional or otherwise,
 - every bright color is lighter (higher OKLab L) than its normal counterpart,
-- every normal-row color clears 3.5:1 contrast against the background, every bright-row
-  color clears 5:1, and bright-black clears 2:1.
+- every normal-row color (and bright-black) clears 3.5:1 contrast against the
+  background, and every other bright-row color clears 5:1.
 
 If an edit fails one of those, the script exits with an assertion error instead of
 writing a file that quietly breaks the guarantees above.

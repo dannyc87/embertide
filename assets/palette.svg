@@ -52,4 +52,13 @@
 <text x="498.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#cf76ff</text>
 <rect x="548" y="184" width="76" height="76" rx="8" fill="#008388"/>
 <text x="586.0" y="277" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Lagoon Teal</text>
-<text x="586.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#008388</text></svg>
+<text x="586.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#008388</text>
+<rect x="636" y="184" width="76" height="76" rx="8" fill="#6d787c"/>
+<text x="674.0" y="277" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Stone Gray</text>
+<text x="674.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#6d787c</text>
+<rect x="724" y="184" width="76" height="76" rx="8" fill="#febd5c"/>
+<text x="762.0" y="277" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Marigold</text>
+<text x="762.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#febd5c</text>
+<rect x="812" y="184" width="76" height="76" rx="8" fill="#f6ebca"/>
+<text x="850.0" y="277" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Warm Ivory</text>
+<text x="850.0" y="290" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#f6ebca</text></svg>

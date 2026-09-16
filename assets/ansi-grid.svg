@@ -39,18 +39,18 @@
 <text x="689.0" y="268" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#211d15" text-anchor="middle">white</text>
 <text x="689.0" y="280" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#756c5b" text-anchor="middle">#e9d8a6</text>
 <text x="20" y="304" font-family="IBM Plex Mono, monospace" font-size="11" fill="#756c5b" letter-spacing="1">BRIGHT (8-15)</text>
-<rect x="20" y="314" width="78" height="78" rx="6" fill="#384f57" stroke="#00000022"/>
+<rect x="20" y="314" width="78" height="78" rx="6" fill="#6d787c" stroke="#00000022"/>
 <text x="59.0" y="406" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#211d15" text-anchor="middle">br.black</text>
-<text x="59.0" y="418" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#756c5b" text-anchor="middle">#384f57</text>
+<text x="59.0" y="418" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#756c5b" text-anchor="middle">#6d787c</text>
 <rect x="110" y="314" width="78" height="78" rx="6" fill="#da5b2d" stroke="#00000022"/>
 <text x="149.0" y="406" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#211d15" text-anchor="middle">br.red</text>
 <text x="149.0" y="418" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#756c5b" text-anchor="middle">#da5b2d</text>
 <rect x="200" y="314" width="78" height="78" rx="6" fill="#8fe259" stroke="#00000022"/>
 <text x="239.0" y="406" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#211d15" text-anchor="middle">br.green</text>
 <text x="239.0" y="418" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#756c5b" text-anchor="middle">#8fe259</text>
-<rect x="290" y="314" width="78" height="78" rx="6" fill="#e9d8a6" stroke="#00000022"/>
+<rect x="290" y="314" width="78" height="78" rx="6" fill="#febd5c" stroke="#00000022"/>
 <text x="329.0" y="406" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#211d15" text-anchor="middle">br.yellow</text>
-<text x="329.0" y="418" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#756c5b" text-anchor="middle">#e9d8a6</text>
+<text x="329.0" y="418" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#756c5b" text-anchor="middle">#febd5c</text>
 <rect x="380" y="314" width="78" height="78" rx="6" fill="#0ad6ff" stroke="#00000022"/>
 <text x="419.0" y="406" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#211d15" text-anchor="middle">br.blue</text>
 <text x="419.0" y="418" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#756c5b" text-anchor="middle">#0ad6ff</text>
@@ -60,6 +60,6 @@
 <rect x="560" y="314" width="78" height="78" rx="6" fill="#94d2bd" stroke="#00000022"/>
 <text x="599.0" y="406" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#211d15" text-anchor="middle">br.cyan</text>
 <text x="599.0" y="418" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#756c5b" text-anchor="middle">#94d2bd</text>
-<rect x="650" y="314" width="78" height="78" rx="6" fill="#e9d8a6" stroke="#00000022"/>
+<rect x="650" y="314" width="78" height="78" rx="6" fill="#f6ebca" stroke="#00000022"/>
 <text x="689.0" y="406" font-family="IBM Plex Sans, sans-serif" font-size="9.5" fill="#211d15" text-anchor="middle">br.white</text>
-<text x="689.0" y="418" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#756c5b" text-anchor="middle">#e9d8a6</text></svg>
+<text x="689.0" y="418" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#756c5b" text-anchor="middle">#f6ebca</text></svg>

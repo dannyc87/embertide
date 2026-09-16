@@ -32,13 +32,15 @@ SPECIFIED = {
     "Forest Kelly": "0a883d", "Neon Lime": "8fe259",
     "Electric Violet": "ab51e3", "Lilac Flash": "cf76ff",
     "Lagoon Teal": "008388",
+    "Stone Gray": "6d787c", "Marigold": "febd5c", "Warm Ivory": "f6ebca",
 }
 
 # ---------------------------------------------------------------------------
-# Final palette: green, blue, and magenta are specified directly
-# (hand-picked bright + a hue-matched normal/derived bright); cyan is
-# deepened/re-saturated to stay distinct from the new blue; red and
-# bright-black are lifted just enough to clear contrast floors.
+# Final palette: green, blue, and magenta are specified directly (hand-picked
+# bright + a hue-matched normal/derived bright); cyan is deepened/re-saturated
+# to stay distinct from the new blue; red is lifted just enough to clear its
+# contrast floor; bright-black, bright-yellow, and bright-white are specified
+# as real distinct colors instead of collapsing onto black/white.
 # ---------------------------------------------------------------------------
 FINAL = {
     "background": "001219", "foreground": "e9d8a6",
@@ -48,9 +50,9 @@ FINAL = {
     "black": "001219", "red": "c23626", "green": "0a883d", "yellow": "ee9b00",
     "blue": "00b4d8", "magenta": "ab51e3", "cyan": "008388", "white": "e9d8a6",
 
-    "bright_black": "384f57", "bright_red": "da5b2d", "bright_green": "8fe259",
-    "bright_yellow": "e9d8a6", "bright_blue": "0ad6ff", "bright_magenta": "cf76ff",
-    "bright_cyan": "94d2bd", "bright_white": "e9d8a6",
+    "bright_black": "6d787c", "bright_red": "da5b2d", "bright_green": "8fe259",
+    "bright_yellow": "febd5c", "bright_blue": "0ad6ff", "bright_magenta": "cf76ff",
+    "bright_cyan": "94d2bd", "bright_white": "f6ebca",
 }
 
 ANSI_ORDER = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
@@ -88,15 +90,13 @@ def oklab_L(hex_color):
 def verify():
     bg = FINAL["background"]
     hexes = [FINAL[r] for r in ANSI_ORDER]
-    dupes = {}
-    for role, h in zip(ANSI_ORDER, hexes):
-        dupes.setdefault(h, []).append(role)
-    unexpected_collisions = [roles for h, roles in dupes.items() if len(roles) > 1
-                              and set(roles) != {"white", "bright_yellow", "bright_white"}]
-    assert not unexpected_collisions, f"Unexpected ANSI collisions: {unexpected_collisions}"
-    assert len(set(hexes)) >= 14, f"Expected >=14 unique ANSI hexes, got {len(set(hexes))}"
+    dupes = {h: roles for h, roles in
+             {h: [r for r, x in zip(ANSI_ORDER, hexes) if x == h] for h in hexes}.items()
+             if len(roles) > 1}
+    assert not dupes, f"Unexpected ANSI collisions: {dupes}"
+    assert len(set(hexes)) == 16, f"Expected 16 unique ANSI hexes, got {len(set(hexes))}"
 
-    for family in ["red", "green", "blue", "magenta"]:
+    for family in ANSI_ORDER[:8]:
         normal_L = oklab_L(FINAL[family])
         bright_L = oklab_L(FINAL["bright_" + family])
         assert bright_L > normal_L, f"bright_{family} should be lighter than {family}"
@@ -109,16 +109,13 @@ def verify():
 
     floors_bright = {"bright_red": 5.0, "bright_green": 5.0, "bright_blue": 5.0,
                       "bright_magenta": 5.0, "bright_yellow": 5.0, "bright_cyan": 5.0,
-                      "bright_white": 5.0}
+                      "bright_white": 5.0, "bright_black": 3.5}
     for role, floor in floors_bright.items():
         cr = contrast(FINAL[role], bg)
         assert cr >= floor - 0.05, f"{role} contrast {cr:.2f} below floor {floor}"
 
-    cr = contrast(FINAL["bright_black"], bg)
-    assert cr >= 2.0, f"bright_black contrast {cr:.2f} below 2.0 floor"
-
-    print("verify: OK — 14/16 unique ANSI slots, all hue families bright>normal, "
-          "contrast floors met (normal >=3.5:1, bright >=5:1, bright_black >=2:1)")
+    print("verify: OK — 16/16 unique ANSI slots, all bright>normal, "
+          "contrast floors met (normal >=3.5:1, bright >=5:1, bright-black >=3.5:1)")
 
 # ---------------------------------------------------------------------------
 # Generators — one function per terminal, all reading from FINAL
