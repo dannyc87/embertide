@@ -515,6 +515,22 @@ def gen_ansi_grid_svg():
 
     write("assets/ansi-grid.svg", svg_wrap(width, y, "\n".join(body)))
 
+def slugify(name):
+    return name.lower().replace(" ", "-")
+
+def gen_swatches():
+    """One small standalone swatch SVG per named color, for embedding inline
+    in README tables (<img src="assets/swatches/slug.svg">) -- generated
+    locally rather than depending on an external color-swatch image service,
+    consistent with how palette.svg/ansi-grid.svg are already produced."""
+    w, hgt = 48, 20
+    for name, hexcol in PALETTE.items():
+        svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{hgt}" '
+               f'viewBox="0 0 {w} {hgt}">\n'
+               f'<rect width="{w}" height="{hgt}" rx="4" fill="#{hexcol}" '
+               f'stroke="#00000022"/>\n</svg>\n')
+        write(f"assets/swatches/{slugify(name)}.svg", svg)
+
 if __name__ == "__main__":
     verify()
     gen_iterm2()
@@ -528,4 +544,5 @@ if __name__ == "__main__":
     gen_warp()
     gen_palette_svg()
     gen_ansi_grid_svg()
+    gen_swatches()
     print("done")

@@ -3,6 +3,9 @@
 A dark terminal theme, built and checked in OKLCH for consistent contrast, hue
 separation, and saturation across every ANSI slot.
 
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![WCAG 2.1 | AA](https://img.shields.io/badge/WCAG_2.1_%7C_AA-001219?logo=w3c&logoColor=e9d8a6&style=flat-square)](https://www.w3.org/TR/WCAG21/#contrast-minimum)
+
 ![Palette](assets/palette.svg)
 
 ## Origin
@@ -185,38 +188,38 @@ are companion repos generated from this same palette, implementing the shared
 
 ### Core roles
 
-| Role | Hex |
-|---|---|
-| Background | `#001219` |
-| Foreground | `#e9d8a6` |
-| Cursor | `#ee9b00` |
-| Selection background | `#4376c2` |
+| Swatch | Role | Hex |
+|---|---|---|
+| ![](assets/swatches/ink-black.svg) | Background | `#001219` |
+| ![](assets/swatches/vanilla-custard.svg) | Foreground | `#e9d8a6` |
+| ![](assets/swatches/golden-orange.svg) | Cursor | `#ee9b00` |
+| ![](assets/swatches/deep-indigo.svg) | Selection background | `#4376c2` |
 
 ### ANSI — normal
 
-| # | Role | Hex | Contrast vs. bg |
-|---|---|---|---|
-| 0 | Black | `#001219` | — |
-| 1 | Red | `#c23626` | 3.5:1 |
-| 2 | Green | `#199647` | 5.0:1 |
-| 3 | Yellow | `#ee9b00` | 8.5:1 |
-| 4 | Blue | `#00b4d8` | 7.7:1 |
-| 5 | Magenta | `#ab51e3` | 4.6:1 |
-| 6 | Cyan | `#008388` | 4.2:1 |
-| 7 | White | `#e9d8a6` | 13.5:1 |
+| # | Swatch | Role | Hex | Contrast vs. bg |
+|---|---|---|---|---|
+| 0 | ![](assets/swatches/ink-black.svg) | Black | `#001219` | — |
+| 1 | ![](assets/swatches/crimson-ember.svg) | Red | `#c23626` | 3.5:1 |
+| 2 | ![](assets/swatches/forest-kelly.svg) | Green | `#199647` | 5.0:1 |
+| 3 | ![](assets/swatches/golden-orange.svg) | Yellow | `#ee9b00` | 8.5:1 |
+| 4 | ![](assets/swatches/azure.svg) | Blue | `#00b4d8` | 7.7:1 |
+| 5 | ![](assets/swatches/electric-violet.svg) | Magenta | `#ab51e3` | 4.6:1 |
+| 6 | ![](assets/swatches/lagoon-teal.svg) | Cyan | `#008388` | 4.2:1 |
+| 7 | ![](assets/swatches/vanilla-custard.svg) | White | `#e9d8a6` | 13.5:1 |
 
 ### ANSI — bright
 
-| # | Role | Hex | Contrast vs. bg |
-|---|---|---|---|
-| 8 | Bright black | `#566165` | 3.0:1 |
-| 9 | Bright red | `#da5b2d` | 5.0:1 |
-| 10 | Bright green | `#8fe259` | 12.0:1 |
-| 11 | Bright yellow | `#febd5c` | 11.5:1 |
-| 12 | Bright blue | `#0ad6ff` | 11.0:1 |
-| 13 | Bright magenta | `#cf76ff` | 7.0:1 |
-| 14 | Bright cyan | `#65dcb9` | 11.3:1 |
-| 15 | Bright white | `#f6ebca` | 16.0:1 |
+| # | Swatch | Role | Hex | Contrast vs. bg |
+|---|---|---|---|---|
+| 8 | ![](assets/swatches/stone-gray.svg) | Bright black | `#566165` | 3.0:1 |
+| 9 | ![](assets/swatches/molten-rust.svg) | Bright red | `#da5b2d` | 5.0:1 |
+| 10 | ![](assets/swatches/neon-lime.svg) | Bright green | `#8fe259` | 12.0:1 |
+| 11 | ![](assets/swatches/marigold.svg) | Bright yellow | `#febd5c` | 11.5:1 |
+| 12 | ![](assets/swatches/sky-flash.svg) | Bright blue | `#0ad6ff` | 11.0:1 |
+| 13 | ![](assets/swatches/lilac-flash.svg) | Bright magenta | `#cf76ff` | 7.0:1 |
+| 14 | ![](assets/swatches/pearl-aqua.svg) | Bright cyan | `#65dcb9` | 11.3:1 |
+| 15 | ![](assets/swatches/warm-ivory.svg) | Bright white | `#f6ebca` | 16.0:1 |
 
 All 16 slots are unique.
 
@@ -224,31 +227,32 @@ All 16 slots are unique.
 
 Every color the current theme actually uses, named:
 
-| Name | Hex | Used as |
-|---|---|---|
-| Ink Black | `#001219` | background, black |
-| Vanilla Custard | `#e9d8a6` | foreground, white, selection text |
-| Golden Orange | `#ee9b00` | cursor, yellow |
-| Crimson Ember | `#c23626` | red |
-| Molten Rust | `#da5b2d` | bright red |
-| Forest Kelly | `#199647` | green |
-| Neon Lime | `#8fe259` | bright green |
-| Azure | `#00b4d8` | blue |
-| Sky Flash | `#0ad6ff` | bright blue |
-| Electric Violet | `#ab51e3` | magenta |
-| Lilac Flash | `#cf76ff` | bright magenta |
-| Lagoon Teal | `#008388` | cyan |
-| Pearl Aqua | `#65dcb9` | bright cyan |
-| Stone Gray | `#566165` | bright black |
-| Marigold | `#febd5c` | bright yellow |
-| Warm Ivory | `#f6ebca` | bright white |
-| Deep Indigo | `#4376c2` | selection background |
+| Swatch | Name | Hex | Used as |
+|---|---|---|---|
+| ![](assets/swatches/ink-black.svg) | Ink Black | `#001219` | background, black |
+| ![](assets/swatches/vanilla-custard.svg) | Vanilla Custard | `#e9d8a6` | foreground, white, selection text |
+| ![](assets/swatches/golden-orange.svg) | Golden Orange | `#ee9b00` | cursor, yellow |
+| ![](assets/swatches/crimson-ember.svg) | Crimson Ember | `#c23626` | red |
+| ![](assets/swatches/molten-rust.svg) | Molten Rust | `#da5b2d` | bright red |
+| ![](assets/swatches/forest-kelly.svg) | Forest Kelly | `#199647` | green |
+| ![](assets/swatches/neon-lime.svg) | Neon Lime | `#8fe259` | bright green |
+| ![](assets/swatches/azure.svg) | Azure | `#00b4d8` | blue |
+| ![](assets/swatches/sky-flash.svg) | Sky Flash | `#0ad6ff` | bright blue |
+| ![](assets/swatches/electric-violet.svg) | Electric Violet | `#ab51e3` | magenta |
+| ![](assets/swatches/lilac-flash.svg) | Lilac Flash | `#cf76ff` | bright magenta |
+| ![](assets/swatches/lagoon-teal.svg) | Lagoon Teal | `#008388` | cyan |
+| ![](assets/swatches/pearl-aqua.svg) | Pearl Aqua | `#65dcb9` | bright cyan |
+| ![](assets/swatches/stone-gray.svg) | Stone Gray | `#566165` | bright black |
+| ![](assets/swatches/marigold.svg) | Marigold | `#febd5c` | bright yellow |
+| ![](assets/swatches/warm-ivory.svg) | Warm Ivory | `#f6ebca` | bright white |
+| ![](assets/swatches/deep-indigo.svg) | Deep Indigo | `#4376c2` | selection background |
 
 ## Regenerating
 
-Every file in this repo (all nine terminal configs plus the two reference SVGs) is
-generated from a single palette dict in [`scripts/build.py`](scripts/build.py). To
-change a color, edit `FINAL` in that file and re-run:
+Every file in this repo (all nine terminal configs, the two reference SVGs, and the
+per-color swatch images used in the tables above) is generated from a single palette
+dict in [`scripts/build.py`](scripts/build.py). To change a color, edit `FINAL` in that
+file and re-run:
 
 ```sh
 python3 scripts/build.py
