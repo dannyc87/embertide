@@ -50,6 +50,11 @@ background — raw hex values don't.
 - Every rule above is asserted by [`scripts/build.py`](scripts/build.py) before it
   writes a single file — see [Regenerating](#regenerating).
 
+How this palette maps to semantic syntax roles (comment, keyword, function, type, and so
+on) across the editor editions is defined once, canonically, in [SPEC.md](SPEC.md) — the
+contract both [embertide-vscode](https://github.com/dannyc87/embertide-vscode) and
+[embertide-jetbrains](https://github.com/dannyc87/embertide-jetbrains) implement.
+
 ## Preview
 
 ![ANSI color grid](assets/ansi-grid.svg)
@@ -162,9 +167,19 @@ with one of the terminal themes above for the pane content, not just the status 
 
 Merge the `workbench.colorCustomizations` block from `vscode/embertide.settings.json`
 into your user or workspace `settings.json`. For a full editor theme (workbench UI and
-syntax highlighting, not just the terminal panel), see
-[dannyc87/embertide-vscode](https://github.com/dannyc87/embertide-vscode) instead — a
-companion repo generated from the same palette.
+syntax highlighting, not just the terminal panel), see [Editor themes](#editor-themes)
+below instead.
+
+## Editor themes
+
+Full editor themes (workbench UI and syntax highlighting, not just the terminal panel)
+are companion repos generated from this same palette, implementing the shared
+[SPEC.md](SPEC.md) role mapping:
+
+| Editor | Repo |
+|---|---|
+| VS Code | [dannyc87/embertide-vscode](https://github.com/dannyc87/embertide-vscode) |
+| JetBrains IDEs (IntelliJ IDEA, PyCharm, WebStorm, etc.) | [dannyc87/embertide-jetbrains](https://github.com/dannyc87/embertide-jetbrains) |
 
 ## Color reference
 
