@@ -1,12 +1,14 @@
 # EmberTide
 
-A dark terminal theme, built and checked in OKLCH for consistent contrast, hue
-separation, and saturation across every ANSI slot.
+A terminal theme in dark and light (**EmberTide Light**), built and checked in OKLCH
+for consistent contrast, hue separation, and saturation across every ANSI slot.
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![WCAG 2.1 | AA](https://img.shields.io/badge/WCAG_2.1_%7C_AA-001219?logo=w3c&logoColor=e9d8a6&style=flat-square)](https://www.w3.org/TR/WCAG21/#contrast-minimum)
 
 ![Palette](assets/palette.svg)
+
+![EmberTide Light palette](assets/palette-light.svg)
 
 ## Origin
 
@@ -34,16 +36,24 @@ Colors are worked and checked in OKLCH (via OKLab), not sRGB directly, since per
 lightness and chroma are what actually determine how a color reads against a
 background — raw hex values don't.
 
-- **Contrast** — every normal-row ANSI color clears ≥3.5:1 against the `#001219`
-  background and every other bright-row color clears ≥5:1. Bright-black clears a lower
+- **Contrast** — every normal-row ANSI color clears ≥3.5:1 against the background
+  (`#001219` dark, `#faf3e0` light) and every other bright-row color clears ≥5:1. Bright-black clears a lower
   ≥2.9:1 against the background, because it also doubles as a *background fill* in some
   UIs (Claude Code's active-prompt highlight bar is one) — what actually matters there
   is foreground text drawn on top of it, which is checked separately and held to a
   real ≥4.5:1 (the original `#6d787c` only managed 3.21:1 there, visibly hard to read).
+  Selected text clears ≥3:1 on the selection fill.
+- **Bright** — a bright color sits further from the background in lightness than its
+  normal counterpart: lighter in dark, darker in light. Either way the bright row is the
+  more emphatic, higher-contrast one.
 - **Hue separation** — neighboring accent colors are compared as OKLab distance (ΔE),
   not just hue angle, since two colors can share a hue and still read as distinct if
   their lightness or chroma differs enough — or sit far apart in hue and still look
-  confusable if lightness and chroma coincide.
+  confusable if lightness and chroma coincide. Every pair of the 12 hue-bearing roles is
+  held to ΔE ≥0.08, same family included, and the selection fill to ΔE ≥0.08 from the
+  background.
+- **One hue per name** — EmberTide Light keeps every accent's OKLCH hue (within 5°) and
+  moves only lightness and chroma, so Azure is the same hue in both variants.
 - **Saturation** — measured as chroma relative to the maximum chroma reachable at a
   color's own lightness and hue (its distance to the sRGB gamut edge), rather than raw
   chroma, which shrinks near black and white regardless of how vivid a color feels. The
@@ -62,25 +72,32 @@ contract both [embertide-vscode](https://github.com/dannyc87/embertide-vscode) a
 
 ![ANSI color grid](assets/ansi-grid.svg)
 
+![EmberTide Light ANSI color grid](assets/ansi-grid-light.svg)
+
 ## Supported terminals
 
-| Terminal | File | Install |
-|---|---|---|
-| [iTerm2](#iterm2) | `iterm2/EmberTide.itermcolors` | Import via Preferences |
-| [Alacritty](#alacritty) | `alacritty/embertide.toml` | `import` in `alacritty.toml` |
-| [Ghostty](#ghostty) | `ghostty/EmberTide` | `theme = EmberTide` |
-| [kitty](#kitty) | `kitty/embertide.conf` | `include` in `kitty.conf` |
-| [WezTerm](#wezterm) | `wezterm/EmberTide.toml` | `color_scheme` in `wezterm.lua` |
-| [Windows Terminal](#windows-terminal) | `windows-terminal/embertide.json` | paste into `settings.json` |
-| [Warp](#warp) | `warp/embertide.yaml` | drop into `~/.warp/themes` |
-| [tmux](#tmux) | `tmux/embertide.tmux` | `source-file` in `.tmux.conf` |
-| [VS Code](#vs-code-integrated-terminal) | `vscode/embertide.settings.json` | merge into `settings.json` |
+| Terminal | Dark | Light | Install |
+|---|---|---|---|
+| [iTerm2](#iterm2) | `iterm2/EmberTide.itermcolors` | `iterm2/EmberTide-Light.itermcolors` | Import via Preferences |
+| [Alacritty](#alacritty) | `alacritty/embertide.toml` | `alacritty/embertide-light.toml` | `import` in `alacritty.toml` |
+| [Ghostty](#ghostty) | `ghostty/EmberTide` | `ghostty/EmberTide-Light` | `theme = EmberTide` |
+| [kitty](#kitty) | `kitty/embertide.conf` | `kitty/embertide-light.conf` | `include` in `kitty.conf` |
+| [WezTerm](#wezterm) | `wezterm/EmberTide.toml` | `wezterm/EmberTide-Light.toml` | `color_scheme` in `wezterm.lua` |
+| [Windows Terminal](#windows-terminal) | `windows-terminal/embertide.json` | `windows-terminal/embertide-light.json` | paste into `settings.json` |
+| [Warp](#warp) | `warp/embertide.yaml` | `warp/embertide-light.yaml` | drop into `~/.warp/themes` |
+| [tmux](#tmux) | `tmux/embertide.tmux` | `tmux/embertide-light.tmux` | `source-file` in `.tmux.conf` |
+| [VS Code](#vs-code-integrated-terminal) | `vscode/embertide.settings.json` | `vscode/embertide-light.settings.json` | merge into `settings.json` |
+
+Each install below shows the dark file; for EmberTide Light, use the light file and name
+the same way.
 
 ### iTerm2
 
 1. Preferences → Profiles → Colors → Color Presets… → Import…
 2. Select `iterm2/EmberTide.itermcolors`.
 3. Choose **EmberTide** from the Color Presets dropdown.
+
+For light, import `iterm2/EmberTide-Light.itermcolors` and choose **EmberTide-Light**.
 
 ### Alacritty
 
@@ -96,6 +113,9 @@ In `~/.config/alacritty/alacritty.toml`:
 import = ["~/.config/alacritty/themes/embertide.toml"]
 ```
 
+For light, copy `alacritty/embertide-light.toml` and import
+`~/.config/alacritty/themes/embertide-light.toml` instead.
+
 ### Ghostty
 
 ```sh
@@ -108,6 +128,9 @@ In `~/.config/ghostty/config`:
 ```
 theme = EmberTide
 ```
+
+For light, copy `ghostty/EmberTide-Light` and set `theme = EmberTide-Light`. To follow the
+system appearance: `theme = light:EmberTide-Light,dark:EmberTide`.
 
 ### kitty
 
@@ -122,6 +145,8 @@ In `~/.config/kitty/kitty.conf`:
 include themes/embertide.conf
 ```
 
+For light, copy `kitty/embertide-light.conf` and `include themes/embertide-light.conf`.
+
 ### WezTerm
 
 ```sh
@@ -135,11 +160,15 @@ In `~/.config/wezterm/wezterm.lua`:
 config.color_scheme = 'EmberTide'
 ```
 
+For light, copy `wezterm/EmberTide-Light.toml` and set
+`config.color_scheme = 'EmberTide-Light'`.
+
 ### Windows Terminal
 
 Open `settings.json` (Settings → Open JSON file), paste the contents of
 `windows-terminal/embertide.json` into the `"schemes"` array, then set
-`"colorScheme": "EmberTide"` on the profile(s) you want themed.
+`"colorScheme": "EmberTide"` on the profile(s) you want themed. For light, paste
+`windows-terminal/embertide-light.json` too and use `"colorScheme": "EmberTide Light"`.
 
 ### Warp
 
@@ -148,7 +177,8 @@ mkdir -p ~/.warp/themes
 cp warp/embertide.yaml ~/.warp/themes/
 ```
 
-Settings → Appearance → Themes → **EmberTide**.
+Settings → Appearance → Themes → **EmberTide**. For light, copy
+`warp/embertide-light.yaml` and pick **EmberTide Light**.
 
 ### tmux
 
@@ -163,13 +193,15 @@ In `~/.tmux.conf`:
 source-file ~/.config/tmux/embertide.tmux
 ```
 
+For light, copy and source `tmux/embertide-light.tmux` instead.
+
 tmux inherits its 16 ANSI colors from the terminal emulator underneath it — pair this
 with one of the terminal themes above for the pane content, not just the status bar.
 
 ### VS Code integrated terminal
 
 Merge the `workbench.colorCustomizations` block from `vscode/embertide.settings.json`
-into your user or workspace `settings.json`. For a full editor theme (workbench UI and
+(or `vscode/embertide-light.settings.json`) into your user or workspace `settings.json`. For a full editor theme (workbench UI and
 syntax highlighting, not just the terminal panel), see [Editor themes](#editor-themes)
 below instead.
 
@@ -247,26 +279,96 @@ Every color the current theme actually uses, named:
 | ![](assets/swatches/warm-ivory.svg) | Warm Ivory | `#f6ebca` | bright white |
 | ![](assets/swatches/deep-indigo.svg) | Deep Indigo | `#4376c2` | selection background |
 
+## Color reference — EmberTide Light
+
+Same roles, same named hues; lightness and chroma re-solved for a light background.
+Swatches live in `assets/swatches/light/`.
+
+### Core roles
+
+| Swatch | Role | Hex | Contrast |
+|---|---|---|---|
+| ![](assets/swatches/light/ivory-mist.svg) | Background | `#faf3e0` | — |
+| ![](assets/swatches/light/ink-black.svg) | Foreground | `#001219` | 17.2:1 vs. bg |
+| ![](assets/swatches/light/golden-orange.svg) | Cursor | `#a76f1c` | 3.8:1 vs. bg |
+| ![](assets/swatches/light/indigo-mist.svg) | Selection background | `#b6d0f6` | 12.1:1 with foreground on it |
+
+### ANSI — normal
+
+| # | Swatch | Role | Hex | Contrast vs. bg |
+|---|---|---|---|---|
+| 0 | ![](assets/swatches/light/ivory-mist.svg) | Black | `#faf3e0` | — |
+| 1 | ![](assets/swatches/light/crimson-ember.svg) | Red | `#d33120` | 4.5:1 |
+| 2 | ![](assets/swatches/light/forest-kelly.svg) | Green | `#199245` | 3.6:1 |
+| 3 | ![](assets/swatches/light/golden-orange.svg) | Yellow | `#a76f1c` | 3.8:1 |
+| 4 | ![](assets/swatches/light/azure.svg) | Blue | `#137289` | 5.0:1 |
+| 5 | ![](assets/swatches/light/electric-violet.svg) | Magenta | `#ba3eff` | 3.6:1 |
+| 6 | ![](assets/swatches/light/lagoon-teal.svg) | Cyan | `#008d92` | 3.6:1 |
+| 7 | ![](assets/swatches/light/deep-slate.svg) | White | `#1c3139` | 12.3:1 |
+
+### ANSI — bright
+
+| # | Swatch | Role | Hex | Contrast vs. bg |
+|---|---|---|---|---|
+| 8 | ![](assets/swatches/light/stone-gray.svg) | Bright black | `#7d888d` | 3.3:1 (foreground on it 5.3:1) |
+| 9 | ![](assets/swatches/light/molten-rust.svg) | Bright red | `#ab3803` | 5.7:1 |
+| 10 | ![](assets/swatches/light/neon-lime.svg) | Bright green | `#2b5506` | 7.9:1 |
+| 11 | ![](assets/swatches/light/marigold.svg) | Bright yellow | `#845800` | 5.6:1 |
+| 12 | ![](assets/swatches/light/sky-flash.svg) | Bright blue | `#0e596a` | 7.1:1 |
+| 13 | ![](assets/swatches/light/lilac-flash.svg) | Bright magenta | `#861ab4` | 6.7:1 |
+| 14 | ![](assets/swatches/light/pearl-aqua.svg) | Bright cyan | `#006f57` | 5.6:1 |
+| 15 | ![](assets/swatches/light/ink-black.svg) | Bright white | `#001219` | 17.2:1 |
+
+Black and white swap ends: black is the background (as in dark), white is Deep Slate and
+bright white is Ink Black, the foreground. All 16 slots are unique.
+
+### Palette
+
+| Swatch | Name | Hex | Used as |
+|---|---|---|---|
+| ![](assets/swatches/light/ink-black.svg) | Ink Black | `#001219` | foreground, bright white, selection text |
+| ![](assets/swatches/light/ivory-mist.svg) | Ivory Mist | `#faf3e0` | background, black, cursor text |
+| ![](assets/swatches/light/golden-orange.svg) | Golden Orange | `#a76f1c` | cursor, yellow |
+| ![](assets/swatches/light/crimson-ember.svg) | Crimson Ember | `#d33120` | red |
+| ![](assets/swatches/light/molten-rust.svg) | Molten Rust | `#ab3803` | bright red |
+| ![](assets/swatches/light/forest-kelly.svg) | Forest Kelly | `#199245` | green |
+| ![](assets/swatches/light/neon-lime.svg) | Neon Lime | `#2b5506` | bright green |
+| ![](assets/swatches/light/azure.svg) | Azure | `#137289` | blue |
+| ![](assets/swatches/light/sky-flash.svg) | Sky Flash | `#0e596a` | bright blue |
+| ![](assets/swatches/light/electric-violet.svg) | Electric Violet | `#ba3eff` | magenta |
+| ![](assets/swatches/light/lilac-flash.svg) | Lilac Flash | `#861ab4` | bright magenta |
+| ![](assets/swatches/light/lagoon-teal.svg) | Lagoon Teal | `#008d92` | cyan |
+| ![](assets/swatches/light/pearl-aqua.svg) | Pearl Aqua | `#006f57` | bright cyan |
+| ![](assets/swatches/light/stone-gray.svg) | Stone Gray | `#7d888d` | bright black |
+| ![](assets/swatches/light/marigold.svg) | Marigold | `#845800` | bright yellow |
+| ![](assets/swatches/light/deep-slate.svg) | Deep Slate | `#1c3139` | white |
+| ![](assets/swatches/light/indigo-mist.svg) | Indigo Mist | `#b6d0f6` | selection background |
+
 ## Regenerating
 
-Every file in this repo (all nine terminal configs, the two reference SVGs, and the
-per-color swatch images used in the tables above) is generated from a single palette
-dict in [`scripts/build.py`](scripts/build.py). To change a color, edit `FINAL` in that
-file and re-run:
+Every file in this repo (all nine terminal configs and the two reference SVGs for each
+variant, and the per-color swatch images used in the tables above) is generated from the
+palette dicts in [`scripts/build.py`](scripts/build.py). To change a color, edit `FINAL`
+(dark) or `FINAL_LIGHT` in that file and re-run:
 
 ```sh
 python3 scripts/build.py
 ```
 
-The script asserts, before writing anything:
+The script asserts, for both variants, before writing anything:
 
 - all 16 ANSI hexes are unique — no collisions, intentional or otherwise,
-- every bright color is lighter (higher OKLab L) than its normal counterpart,
+- every bright color sits further from the background in OKLab L than its normal
+  counterpart (lighter in dark, darker in light),
 - every normal-row color clears 3.5:1 contrast against the background, every other
   bright-row color clears 5:1, and bright-black clears 2.9:1 against the background
   *and* 4.5:1 with foreground text drawn on top of it,
+- selected text clears 3:1 on the selection fill, and the fill sits ΔE ≥0.08 from the
+  background,
 - every hue-bearing accent color sits at ≥65% of the maximum chroma reachable at its
-  own lightness and hue.
+  own lightness and hue,
+- every pair of hue-bearing accents is ΔE ≥0.08 apart in OKLab,
+- every light accent stays within 5° of its dark counterpart's OKLCH hue.
 
 If an edit fails one of those, the script exits with an assertion error instead of
 writing a file that quietly breaks the guarantees above.

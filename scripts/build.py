@@ -48,13 +48,63 @@ FINAL = {
     "bright_cyan": "65dcb9", "bright_white": "f6ebca",
 }
 
+# ---------------------------------------------------------------------------
+# EmberTide Light: the same roles and named hues, re-solved for a light
+# background. Each accent keeps its dark counterpart's OKLCH hue; only
+# lightness and chroma move, so a name means the same hue in both variants.
+# On light, "bright" means *further from the background* -- darker, higher
+# contrast -- which is the same relationship the dark variant has, mirrored.
+# Black and white swap ends: black is the background (as in dark), white is a
+# deep slate and bright white is Ink Black, the foreground.
+# ---------------------------------------------------------------------------
+PALETTE_LIGHT = {
+    "Ink Black": "001219", "Ivory Mist": "faf3e0", "Golden Orange": "a76f1c",
+    "Crimson Ember": "d33120", "Molten Rust": "ab3803",
+    "Forest Kelly": "199245", "Neon Lime": "2b5506",
+    "Azure": "137289", "Sky Flash": "0e596a",
+    "Electric Violet": "ba3eff", "Lilac Flash": "861ab4",
+    "Lagoon Teal": "008d92", "Pearl Aqua": "006f57",
+    "Stone Gray": "7d888d", "Marigold": "845800", "Deep Slate": "1c3139",
+    "Indigo Mist": "b6d0f6",
+}
+
+FINAL_LIGHT = {
+    "background": "faf3e0", "foreground": "001219",
+    "cursor": "a76f1c", "cursor_text": "faf3e0",
+    "selection_bg": "b6d0f6", "selection_fg": "001219",
+
+    "black": "faf3e0", "red": "d33120", "green": "199245", "yellow": "a76f1c",
+    "blue": "137289", "magenta": "ba3eff", "cyan": "008d92", "white": "1c3139",
+
+    "bright_black": "7d888d", "bright_red": "ab3803", "bright_green": "2b5506",
+    "bright_yellow": "845800", "bright_blue": "0e596a", "bright_magenta": "861ab4",
+    "bright_cyan": "006f57", "bright_white": "001219",
+}
+
+class Variant:
+    """One shipped variant: its name, colors, and where its files go. Dark
+    keeps the original, unsuffixed file names; light adds "-light"."""
+    def __init__(self, title, mode, palette, final, suffix):
+        self.title, self.mode, self.palette, self.final = title, mode, palette, final
+        self.Stem = "EmberTide" + suffix.title()    # EmberTide / EmberTide-Light
+        self.stem = "embertide" + suffix            # embertide / embertide-light
+        self.suffix = suffix
+        self.swatch_dir = "assets/swatches" + ("/" + suffix.lstrip("-") if suffix else "")
+
+    def h(self, role):
+        return self.final[role]
+
+DARK = Variant("EmberTide", "dark", PALETTE, FINAL, "")
+LIGHT = Variant("EmberTide Light", "light", PALETTE_LIGHT, FINAL_LIGHT, "-light")
+VARIANTS = [DARK, LIGHT]
+
 ANSI_ORDER = ["black", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
               "bright_black", "bright_red", "bright_green", "bright_yellow",
               "bright_blue", "bright_magenta", "bright_cyan", "bright_white"]
 
 # ---------------------------------------------------------------------------
 # Color math (sRGB <-> OKLab/OKLCH, WCAG contrast) — used only to verify
-# the FINAL dict above, not to derive it (it was already derived offline).
+# the FINAL dicts above, not to derive them (they were derived offline).
 # ---------------------------------------------------------------------------
 def srgb_to_linear(c):
     return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
@@ -127,61 +177,99 @@ def saturation_ratio(hex_color):
     cmax = max_chroma(L, H)
     return C / cmax if cmax > 0 else 0.0
 
-def verify():
-    bg = FINAL["background"]
-    hexes = [FINAL[r] for r in ANSI_ORDER]
+ACCENT_ROLES = ["red", "green", "yellow", "blue", "magenta", "cyan",
+                "bright_red", "bright_green", "bright_yellow",
+                "bright_blue", "bright_magenta", "bright_cyan"]
+
+def oklch_H(hex_color):
+    _, a, b = rgb_to_oklab(hex_color)
+    return math.degrees(math.atan2(b, a)) % 360
+
+def delta_e(hex1, hex2):
+    return math.dist(rgb_to_oklab(hex1), rgb_to_oklab(hex2))
+
+def verify(v):
+    final = v.final
+    bg = final["background"]
+    hexes = [final[r] for r in ANSI_ORDER]
     dupes = {h: roles for h, roles in
              {h: [r for r, x in zip(ANSI_ORDER, hexes) if x == h] for h in hexes}.items()
              if len(roles) > 1}
-    assert not dupes, f"Unexpected ANSI collisions: {dupes}"
-    assert len(set(hexes)) == 16, f"Expected 16 unique ANSI hexes, got {len(set(hexes))}"
+    assert not dupes, f"{v.title}: unexpected ANSI collisions: {dupes}"
+    assert len(set(hexes)) == 16, f"{v.title}: expected 16 unique ANSI hexes, got {len(set(hexes))}"
 
+    # "Bright" means further from the background in OKLab L than its normal
+    # counterpart: lighter on dark, darker on light. Same rule, both variants.
+    bg_L = oklab_L(bg)
     for family in ANSI_ORDER[:8]:
-        normal_L = oklab_L(FINAL[family])
-        bright_L = oklab_L(FINAL["bright_" + family])
-        assert bright_L > normal_L, f"bright_{family} should be lighter than {family}"
+        normal_d = abs(oklab_L(final[family]) - bg_L)
+        bright_d = abs(oklab_L(final["bright_" + family]) - bg_L)
+        assert bright_d > normal_d, (
+            f"{v.title}: bright_{family} should sit further from the background than {family}")
 
     floors_normal = {"red": 3.5, "green": 3.5, "blue": 3.5, "magenta": 3.5,
                       "yellow": 3.5, "cyan": 3.5, "white": 3.5}
     for role, floor in floors_normal.items():
-        cr = contrast(FINAL[role], bg)
-        assert cr >= floor - 0.05, f"{role} contrast {cr:.2f} below floor {floor}"
+        cr = contrast(final[role], bg)
+        assert cr >= floor - 0.05, f"{v.title}: {role} contrast {cr:.2f} below floor {floor}"
 
     floors_bright = {"bright_red": 5.0, "bright_green": 5.0, "bright_blue": 5.0,
                       "bright_magenta": 5.0, "bright_yellow": 5.0, "bright_cyan": 5.0,
                       "bright_white": 5.0, "bright_black": 2.9}
     for role, floor in floors_bright.items():
-        cr = contrast(FINAL[role], bg)
-        assert cr >= floor - 0.05, f"{role} contrast {cr:.2f} below floor {floor}"
+        cr = contrast(final[role], bg)
+        assert cr >= floor - 0.05, f"{v.title}: {role} contrast {cr:.2f} below floor {floor}"
 
     # bright-black doubles as a background fill (e.g. Claude Code's active-prompt
     # highlight bar), with foreground text drawn on top of it -- that pairing
     # needs its own WCAG-AA floor, independent of bright-black's contrast against
     # the main background above. This is what caught the original #6d787c
     # (foreground-on-it was only 3.21:1, visibly hard to read).
-    fg_on_bright_black = contrast(FINAL["foreground"], FINAL["bright_black"])
+    fg_on_bright_black = contrast(final["foreground"], final["bright_black"])
     assert fg_on_bright_black >= 4.5 - 0.05, (
-        f"foreground-on-bright_black contrast {fg_on_bright_black:.2f} below 4.5 floor")
+        f"{v.title}: foreground-on-bright_black contrast {fg_on_bright_black:.2f} below 4.5 floor")
+
+    # Selection: selected text must stay readable on the selection fill (3:1,
+    # WCAG's large-text/UI floor -- dark's Deep Indigo sits at 3.2:1), and the
+    # fill itself must read as distinct from the background (same ΔE floor as
+    # the accents below).
+    sel = contrast(final["selection_fg"], final["selection_bg"])
+    assert sel >= 3.0 - 0.05, f"{v.title}: selection text contrast {sel:.2f} below 3.0 floor"
+    sel_de = delta_e(final["selection_bg"], bg)
+    assert sel_de >= 0.08, f"{v.title}: selection ΔE {sel_de:.3f} from background below 0.08"
 
     # Saturation consistency: the 12 hue-bearing accent roles (excludes
     # black/white/bright-black/bright-white, which are neutrals by design)
     # must sit reasonably close to the sRGB gamut edge for their own L,H, so
     # nothing reads as unintentionally "pastel" next to everything else's
     # "neon." 65% floor gives headroom below the current worst case (~75%).
-    accent_roles = ["red", "green", "yellow", "blue", "magenta", "cyan",
-                     "bright_red", "bright_green", "bright_yellow",
-                     "bright_blue", "bright_magenta", "bright_cyan"]
-    for role in accent_roles:
-        sat = saturation_ratio(FINAL[role])
-        assert sat >= 0.65 - 0.01, f"{role} saturation {sat*100:.1f}% below 65% floor"
+    for role in ACCENT_ROLES:
+        sat = saturation_ratio(final[role])
+        assert sat >= 0.65 - 0.01, f"{v.title}: {role} saturation {sat*100:.1f}% below 65% floor"
 
-    print("verify: OK — 16/16 unique ANSI slots, all bright>normal, "
-          "contrast floors met (normal >=3.5:1, bright >=5:1, bright-black >=2.9:1 "
-          "vs background, foreground-on-bright-black >=4.5:1), "
-          "accent saturation >=65% of gamut")
+    # Hue separation: every pair of accents, same family included, must be at
+    # least 0.08 apart as OKLab ΔE -- distance in lightness and chroma counts,
+    # not just hue angle. Dark's closest pair (red / bright red) is ~0.088.
+    for i, a in enumerate(ACCENT_ROLES):
+        for b in ACCENT_ROLES[i + 1:]:
+            de = delta_e(final[a], final[b])
+            assert de >= 0.08, f"{v.title}: {a} / {b} ΔE {de:.3f} below 0.08 floor"
+
+    # A name means one hue in every variant: a light accent may move in
+    # lightness and chroma, but stays within 5° of its dark counterpart's hue.
+    for role in ACCENT_ROLES:
+        dh = abs(oklch_H(final[role]) - oklch_H(FINAL[role]))
+        dh = min(dh, 360 - dh)
+        assert dh <= 5, f"{v.title}: {role} hue drifted {dh:.1f}° from the dark variant"
+
+    print(f"verify {v.title}: OK — 16/16 unique ANSI slots, all bright further from "
+          "background than normal, contrast floors met (normal >=3.5:1, bright >=5:1, "
+          "bright-black >=2.9:1 vs background, foreground-on-bright-black >=4.5:1, "
+          "selection text >=3:1), accent saturation >=65% of gamut, accent ΔE >=0.08, "
+          "hues within 5° of dark")
 
 # ---------------------------------------------------------------------------
-# Generators — one function per terminal, all reading from FINAL
+# Generators — one function per terminal, each reading one variant's final dict
 # ---------------------------------------------------------------------------
 def write(path, content):
     full = os.path.join(ROOT, path)
@@ -190,10 +278,8 @@ def write(path, content):
         f.write(content)
     print("wrote", path)
 
-def h(role):
-    return FINAL[role]
-
-def gen_iterm2():
+def gen_iterm2(v):
+    h = v.h
     def comp(hexcol):
         r, g, b = hex_to_rgb01(hexcol)
         return f'\t\t<key>Red Component</key><real>{r:.6f}</real>\n\t\t<key>Green Component</key><real>{g:.6f}</real>\n\t\t<key>Blue Component</key><real>{b:.6f}</real>\n\t\t<key>Alpha Component</key><real>1</real>'
@@ -219,14 +305,15 @@ def gen_iterm2():
         '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n'
         '<plist version="1.0">\n<dict>\n' + body + '\n</dict>\n</plist>\n'
     )
-    write("iterm2/EmberTide.itermcolors", xml)
+    write(f"iterm2/{v.Stem}.itermcolors", xml)
 
-def gen_alacritty():
+def gen_alacritty(v):
+    h = v.h
     n = lambda r: f'"#{h(r)}"'
-    content = f"""# EmberTide — dark terminal theme for Alacritty
-# Save as ~/.config/alacritty/themes/embertide.toml, then in alacritty.toml:
+    content = f"""# {v.title} — {v.mode} terminal theme for Alacritty
+# Save as ~/.config/alacritty/themes/{v.stem}.toml, then in alacritty.toml:
 #   [general]
-#   import = ["~/.config/alacritty/themes/embertide.toml"]
+#   import = ["~/.config/alacritty/themes/{v.stem}.toml"]
 # Generated by scripts/build.py — do not hand-edit.
 
 [colors]
@@ -264,14 +351,15 @@ magenta = {n('bright_magenta')}
 cyan    = {n('bright_cyan')}
 white   = {n('bright_white')}
 """
-    write("alacritty/embertide.toml", content)
+    write(f"alacritty/{v.stem}.toml", content)
 
-def gen_ghostty():
+def gen_ghostty(v):
+    h = v.h
     lines = [f"palette = {i}=#{h(role)}" for i, role in enumerate(ANSI_ORDER)]
-    content = f"""# EmberTide — dark terminal theme for Ghostty
-# Save as ~/.config/ghostty/themes/EmberTide (no extension — the filename
+    content = f"""# {v.title} — {v.mode} terminal theme for Ghostty
+# Save as ~/.config/ghostty/themes/{v.Stem} (no extension — the filename
 # is the theme name), then in ~/.config/ghostty/config:
-#   theme = EmberTide
+#   theme = {v.Stem}
 # Generated by scripts/build.py — do not hand-edit.
 
 background = {h('background')}
@@ -284,13 +372,14 @@ bold-is-bright = true
 
 {chr(10).join(lines)}
 """
-    write("ghostty/EmberTide", content)
+    write(f"ghostty/{v.Stem}", content)
 
-def gen_kitty():
+def gen_kitty(v):
+    h = v.h
     lines = [f"color{i:<2} #{h(role)}" for i, role in enumerate(ANSI_ORDER)]
-    content = f"""# EmberTide — dark terminal theme for kitty
-# Save as ~/.config/kitty/themes/embertide.conf, then in kitty.conf:
-#   include themes/embertide.conf
+    content = f"""# {v.title} — {v.mode} terminal theme for kitty
+# Save as ~/.config/kitty/themes/{v.stem}.conf, then in kitty.conf:
+#   include themes/{v.stem}.conf
 # Generated by scripts/build.py — do not hand-edit.
 
 background            #{h('background')}
@@ -303,14 +392,15 @@ bold_font              auto
 
 {chr(10).join(lines)}
 """
-    write("kitty/embertide.conf", content)
+    write(f"kitty/{v.stem}.conf", content)
 
-def gen_wezterm():
+def gen_wezterm(v):
+    h = v.h
     ansi = ", ".join(f'"#{h(r)}"' for r in ANSI_ORDER[:8])
     bright = ", ".join(f'"#{h(r)}"' for r in ANSI_ORDER[8:])
-    content = f"""# EmberTide — dark terminal theme for WezTerm
-# Save as ~/.config/wezterm/colors/EmberTide.toml, then in wezterm.lua:
-#   config.color_scheme = 'EmberTide'
+    content = f"""# {v.title} — {v.mode} terminal theme for WezTerm
+# Save as ~/.config/wezterm/colors/{v.Stem}.toml, then in wezterm.lua:
+#   config.color_scheme = '{v.Stem}'
 # Generated by scripts/build.py — do not hand-edit.
 
 [colors]
@@ -325,13 +415,14 @@ selection_bg = "#{h('selection_bg')}"
 ansi = [{ansi}]
 brights = [{bright}]
 """
-    write("wezterm/EmberTide.toml", content)
+    write(f"wezterm/{v.Stem}.toml", content)
 
-def gen_windows_terminal():
+def gen_windows_terminal(v):
+    h = v.h
     content = f"""{{
-  "//": "EmberTide — Windows Terminal color scheme. Generated by scripts/build.py — do not hand-edit.",
-  "//install": "Paste into the \\"schemes\\" array in settings.json, then set \\"colorScheme\\": \\"EmberTide\\" on a profile.",
-  "name": "EmberTide",
+  "//": "{v.title} — Windows Terminal color scheme. Generated by scripts/build.py — do not hand-edit.",
+  "//install": "Paste into the \\"schemes\\" array in settings.json, then set \\"colorScheme\\": \\"{v.title}\\" on a profile.",
+  "name": "{v.title}",
   "background": "#{h('background')}",
   "foreground": "#{h('foreground')}",
   "cursorColor": "#{h('cursor')}",
@@ -354,16 +445,17 @@ def gen_windows_terminal():
   "brightWhite": "#{h('bright_white')}"
 }}
 """
-    write("windows-terminal/embertide.json", content)
+    write(f"windows-terminal/{v.stem}.json", content)
 
-def gen_tmux():
-    content = f"""# EmberTide — tmux status bar & chrome theme
+def gen_tmux(v):
+    h = v.h
+    content = f"""# {v.title} — tmux status bar & chrome theme
 # tmux inherits its 16 ANSI colors from the underlying terminal emulator —
 # pair this with one of the terminal themes in this repo. This file only
 # themes tmux's own UI: status bar, pane borders, messages, copy mode.
 #
 # Source it from ~/.tmux.conf:
-#   source-file ~/.config/tmux/embertide.tmux
+#   source-file ~/.config/tmux/{v.stem}.tmux
 # Generated by scripts/build.py — do not hand-edit.
 
 set -g status-style "bg=#{h('background')},fg=#{h('foreground')}"
@@ -380,11 +472,12 @@ set -g message-command-style "bg=#{h('selection_bg')},fg=#{h('foreground')}"
 
 set -g mode-style "bg=#{h('selection_bg')},fg=#{h('foreground')}"
 """
-    write("tmux/embertide.tmux", content)
+    write(f"tmux/{v.stem}.tmux", content)
 
-def gen_vscode():
+def gen_vscode(v):
+    h = v.h
     content = f"""{{
-  "//": "EmberTide — VS Code integrated terminal colors. Generated by scripts/build.py — do not hand-edit.",
+  "//": "{v.title} — VS Code integrated terminal colors. Generated by scripts/build.py — do not hand-edit.",
   "//install": "Merge the workbench.colorCustomizations block into your settings.json.",
   "workbench.colorCustomizations": {{
     "terminal.background": "#{h('background')}",
@@ -411,19 +504,20 @@ def gen_vscode():
   }}
 }}
 """
-    write("vscode/embertide.settings.json", content)
+    write(f"vscode/{v.stem}.settings.json", content)
 
-def gen_warp():
-    content = f"""# EmberTide — dark terminal theme for Warp
-# Save as ~/.warp/themes/embertide.yaml, then select "EmberTide" in
+def gen_warp(v):
+    h = v.h
+    content = f"""# {v.title} — {v.mode} terminal theme for Warp
+# Save as ~/.warp/themes/{v.stem}.yaml, then select "{v.title}" in
 # Warp -> Settings -> Appearance -> Themes.
 # Generated by scripts/build.py — do not hand-edit.
 
-name: EmberTide
+name: {v.title}
 accent: "#{h('cursor')}"
 background: "#{h('background')}"
 foreground: "#{h('foreground')}"
-details: darker
+details: {"darker" if v.mode == "dark" else "lighter"}
 terminal_colors:
   normal:
     black: "#{h('black')}"
@@ -444,7 +538,7 @@ terminal_colors:
     cyan: "#{h('bright_cyan')}"
     white: "#{h('bright_white')}"
 """
-    write("warp/embertide.yaml", content)
+    write(f"warp/{v.stem}.yaml", content)
 
 # ---------------------------------------------------------------------------
 # SVGs
@@ -453,12 +547,12 @@ def svg_wrap(width, height, body, bg="#f5f1e6"):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
             f'viewBox="0 0 {width} {height}">\n<rect width="{width}" height="{height}" fill="{bg}"/>\n{body}</svg>\n')
 
-def gen_palette_svg():
+def gen_palette_svg(v):
     sw, gap, margin = 76, 12, 20
     label_h, row_gap, per_row = 34, 22, 9
     width = margin * 2 + per_row * sw + (per_row - 1) * gap
 
-    items = list(PALETTE.items())
+    items = list(v.palette.items())
     rows = [items[i:i + per_row] for i in range(0, len(items), per_row)]
 
     parts = [f'<text x="{margin}" y="28" font-family="IBM Plex Mono, monospace" font-size="11" '
@@ -467,7 +561,8 @@ def gen_palette_svg():
     for row_items in rows:
         x = margin
         for name, hexcol in row_items:
-            parts.append(f'<rect x="{x}" y="{y}" width="{sw}" height="{sw}" rx="8" fill="#{hexcol}"/>')
+            parts.append(f'<rect x="{x}" y="{y}" width="{sw}" height="{sw}" rx="8" fill="#{hexcol}" '
+                          f'stroke="#00000022"/>')
             parts.append(f'<text x="{x + sw/2}" y="{y + sw + 17}" font-family="IBM Plex Sans, sans-serif" '
                           f'font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">{name}</text>')
             parts.append(f'<text x="{x + sw/2}" y="{y + sw + 30}" font-family="IBM Plex Mono, monospace" '
@@ -476,9 +571,10 @@ def gen_palette_svg():
         y += sw + label_h + row_gap
     y = y - row_gap + 8
 
-    write("assets/palette.svg", svg_wrap(width, y, "\n".join(parts)))
+    write(f"assets/palette{v.suffix}.svg", svg_wrap(width, y, "\n".join(parts)))
 
-def gen_ansi_grid_svg():
+def gen_ansi_grid_svg(v):
+    h = v.h
     cols, sw, gap, margin = 8, 78, 12, 20
     header_h, label_h, row_gap = 20, 28, 22
     width = margin * 2 + cols * sw + (cols - 1) * gap
@@ -513,36 +609,38 @@ def gen_ansi_grid_svg():
     body.append(r)
     y = y2 + 8
 
-    write("assets/ansi-grid.svg", svg_wrap(width, y, "\n".join(body)))
+    write(f"assets/ansi-grid{v.suffix}.svg", svg_wrap(width, y, "\n".join(body)))
 
 def slugify(name):
     return name.lower().replace(" ", "-")
 
-def gen_swatches():
+def gen_swatches(v):
     """One small standalone swatch SVG per named color, for embedding inline
     in README tables (<img src="assets/swatches/slug.svg">) -- generated
     locally rather than depending on an external color-swatch image service,
     consistent with how palette.svg/ansi-grid.svg are already produced."""
     w, hgt = 48, 20
-    for name, hexcol in PALETTE.items():
+    for name, hexcol in v.palette.items():
         svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{hgt}" '
                f'viewBox="0 0 {w} {hgt}">\n'
                f'<rect width="{w}" height="{hgt}" rx="4" fill="#{hexcol}" '
                f'stroke="#00000022"/>\n</svg>\n')
-        write(f"assets/swatches/{slugify(name)}.svg", svg)
+        write(f"{v.swatch_dir}/{slugify(name)}.svg", svg)
 
 if __name__ == "__main__":
-    verify()
-    gen_iterm2()
-    gen_alacritty()
-    gen_ghostty()
-    gen_kitty()
-    gen_wezterm()
-    gen_windows_terminal()
-    gen_tmux()
-    gen_vscode()
-    gen_warp()
-    gen_palette_svg()
-    gen_ansi_grid_svg()
-    gen_swatches()
+    for v in VARIANTS:
+        verify(v)
+    for v in VARIANTS:
+        gen_iterm2(v)
+        gen_alacritty(v)
+        gen_ghostty(v)
+        gen_kitty(v)
+        gen_wezterm(v)
+        gen_windows_terminal(v)
+        gen_tmux(v)
+        gen_vscode(v)
+        gen_warp(v)
+        gen_palette_svg(v)
+        gen_ansi_grid_svg(v)
+        gen_swatches(v)
     print("done")
