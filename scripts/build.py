@@ -23,13 +23,14 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # ---------------------------------------------------------------------------
 PALETTE = {
     "Ink Black": "001219", "Vanilla Custard": "e9d8a6", "Golden Orange": "ee9b00",
-    "Crimson Ember": "c23626", "Molten Rust": "da5b2d",
+    "Crimson Ember": "c23626", "Molten Rust": "f26e3f",
     "Forest Kelly": "199647", "Neon Lime": "8fe259",
     "Azure": "00b4d8", "Sky Flash": "0ad6ff",
     "Electric Violet": "ab51e3", "Lilac Flash": "cf76ff",
     "Lagoon Teal": "008388", "Pearl Aqua": "65dcb9",
     "Stone Gray": "566165", "Marigold": "febd5c", "Warm Ivory": "f6ebca",
-    "Deep Indigo": "4376c2",
+    "Deep Indigo": "4376c2", "Deep Slate": "1c3139", "Slate Mist": "8d9ba0",
+    "Night Indigo": "2c5084",
 }
 
 # ---------------------------------------------------------------------------
@@ -43,9 +44,15 @@ FINAL = {
     "black": "001219", "red": "c23626", "green": "199647", "yellow": "ee9b00",
     "blue": "00b4d8", "magenta": "ab51e3", "cyan": "008388", "white": "e9d8a6",
 
-    "bright_black": "566165", "bright_red": "da5b2d", "bright_green": "8fe259",
+    "bright_black": "566165", "bright_red": "f26e3f", "bright_green": "8fe259",
     "bright_yellow": "febd5c", "bright_blue": "0ad6ff", "bright_magenta": "cf76ff",
     "bright_cyan": "65dcb9", "bright_white": "f6ebca",
+
+    # UI roles beyond the terminal, for app themes built on EmberTide (Faena):
+    # a card surface, dim text that stays readable on it, a blue for links and
+    # charts, and a selection fill strong enough for bright-white text.
+    "card": "1c3139", "dim_text": "8d9ba0", "indigo": "4376c2",
+    "selection_strong": "2c5084",
 }
 
 # ---------------------------------------------------------------------------
@@ -58,27 +65,31 @@ FINAL = {
 # deep slate and bright white is Ink Black, the foreground.
 # ---------------------------------------------------------------------------
 PALETTE_LIGHT = {
-    "Ink Black": "001219", "Ivory Mist": "faf3e0", "Golden Orange": "a76f1c",
+    "Ink Black": "001219", "Ivory Mist": "faf3e0", "Golden Orange": "a8701c",
     "Crimson Ember": "d33120", "Molten Rust": "ab3803",
     "Forest Kelly": "199245", "Neon Lime": "2b5506",
     "Azure": "137289", "Sky Flash": "0e596a",
     "Electric Violet": "ba3eff", "Lilac Flash": "861ab4",
     "Lagoon Teal": "008d92", "Pearl Aqua": "006f57",
     "Stone Gray": "7d888d", "Marigold": "845800", "Deep Slate": "1c3139",
-    "Indigo Mist": "b6d0f6",
+    "Indigo Mist": "b6d0f6", "Paper White": "fefdf9", "Slate Mist": "57666b",
+    "Deep Indigo": "2268cb",
 }
 
 FINAL_LIGHT = {
     "background": "faf3e0", "foreground": "001219",
-    "cursor": "a76f1c", "cursor_text": "faf3e0",
+    "cursor": "a8701c", "cursor_text": "001219",
     "selection_bg": "b6d0f6", "selection_fg": "001219",
 
-    "black": "faf3e0", "red": "d33120", "green": "199245", "yellow": "a76f1c",
+    "black": "faf3e0", "red": "d33120", "green": "199245", "yellow": "a8701c",
     "blue": "137289", "magenta": "ba3eff", "cyan": "008d92", "white": "1c3139",
 
     "bright_black": "7d888d", "bright_red": "ab3803", "bright_green": "2b5506",
     "bright_yellow": "845800", "bright_blue": "0e596a", "bright_magenta": "861ab4",
     "bright_cyan": "006f57", "bright_white": "001219",
+
+    "card": "fefdf9", "dim_text": "57666b", "indigo": "2268cb",
+    "selection_strong": "b6d0f6",
 }
 
 class Variant:
@@ -255,6 +266,37 @@ def verify(v):
             de = delta_e(final[a], final[b])
             assert de >= 0.08, f"{v.title}: {a} / {b} ΔE {de:.3f} below 0.08 floor"
 
+    # UI roles. Dim text is a readable step between Stone Gray and the
+    # foreground, on the background and on a card. Ink Black text must read on
+    # the accent (buttons), bright red must read as text on a card, the indigo
+    # must read against the background and stay apart from blue, and the
+    # strong selection fill must carry bright-white text.
+    card = final["card"]
+    dim = final["dim_text"]
+    for surface in (bg, card):
+        cr = contrast(dim, surface)
+        assert cr >= 4.5, f"{v.title}: dim_text contrast {cr:.2f} on #{surface} below 4.5"
+    dim_d = abs(oklab_L(dim) - bg_L)
+    assert (abs(oklab_L(final["bright_black"]) - bg_L) < dim_d
+            < abs(oklab_L(final["foreground"]) - bg_L)), (
+        f"{v.title}: dim_text should sit between bright_black and foreground")
+    ink_on_accent = contrast(PALETTE["Ink Black"], final["cursor"])
+    assert ink_on_accent >= 4.5, f"{v.title}: Ink Black on accent {ink_on_accent:.2f} below 4.5"
+    red_on_card = contrast(final["bright_red"], card)
+    assert red_on_card >= 4.5, f"{v.title}: bright_red on card {red_on_card:.2f} below 4.5"
+    cr = contrast(final["indigo"], bg)
+    assert cr >= 3.0, f"{v.title}: indigo contrast {cr:.2f} below 3.0"
+    de = delta_e(final["indigo"], final["blue"])
+    assert de >= 0.08, f"{v.title}: indigo / blue ΔE {de:.3f} below 0.08"
+    dh = abs(oklch_H(final["indigo"]) - oklch_H(FINAL["indigo"]))
+    assert min(dh, 360 - dh) <= 5, f"{v.title}: indigo hue drifted from the dark variant"
+    sel = final["selection_strong"]
+    cr = contrast(final["bright_white"], sel)
+    assert cr >= 4.5, f"{v.title}: bright_white on selection_strong {cr:.2f} below 4.5"
+    for surface in (bg, card):
+        de = delta_e(sel, surface)
+        assert de >= 0.08, f"{v.title}: selection_strong ΔE {de:.3f} from #{surface} below 0.08"
+
     # A name means one hue in every variant: a light accent may move in
     # lightness and chroma, but stays within 5° of its dark counterpart's hue.
     for role in ACCENT_ROLES:
@@ -266,7 +308,8 @@ def verify(v):
           "background than normal, contrast floors met (normal >=3.5:1, bright >=5:1, "
           "bright-black >=2.9:1 vs background, foreground-on-bright-black >=4.5:1, "
           "selection text >=3:1), accent saturation >=65% of gamut, accent ΔE >=0.08, "
-          "hues within 5° of dark")
+          "hues within 5° of dark, UI roles (dim text, ink on accent, red on card, "
+          "indigo, strong selection) readable")
 
 # ---------------------------------------------------------------------------
 # Generators — one function per terminal, each reading one variant's final dict

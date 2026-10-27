@@ -27,6 +27,22 @@ named color in light, the tables below say so.
 | Selection background | Deep Indigo | Indigo Mist |
 | Dim / de-emphasized UI | Stone Gray (bright black) | |
 
+### UI roles
+
+For app themes built on EmberTide (e.g. Faena); terminals don't use these.
+
+| Role | Named color | Light, where it differs |
+|---|---|---|
+| Card surface | Deep Slate | Paper White |
+| Dim text (readable, on background and card) | Slate Mist | |
+| Text on accent fills | Ink Black | |
+| Error text on cards | Molten Rust (bright red) | |
+| Indigo (links, charts) | Deep Indigo | |
+| Strong selection (bright-white text on it) | Night Indigo | Indigo Mist |
+
+Dim text (Slate Mist) is for readable secondary text; Stone Gray stays the dim for
+de-emphasized UI and comments.
+
 "Accent" and "dim" recur constantly below — accent marks the one CTA-like highlight
 color (cursor, active-tab underline, primary buttons); dim marks anything intentionally
 de-emphasized (comments, punctuation, borders, inactive UI).

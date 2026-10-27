@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="820" height="288" viewBox="0 0 820 288">
-<rect width="820" height="288" fill="#f5f1e6"/>
-<text x="20" y="28" font-family="IBM Plex Mono, monospace" font-size="11" fill="#756c5b" letter-spacing="1">PALETTE (17 colors)</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="420" viewBox="0 0 820 420">
+<rect width="820" height="420" fill="#f5f1e6"/>
+<text x="20" y="28" font-family="IBM Plex Mono, monospace" font-size="11" fill="#756c5b" letter-spacing="1">PALETTE (20 colors)</text>
 <rect x="20" y="38" width="76" height="76" rx="8" fill="#001219" stroke="#00000022"/>
 <text x="58.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Ink Black</text>
 <text x="58.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#001219</text>
@@ -13,9 +13,9 @@
 <rect x="284" y="38" width="76" height="76" rx="8" fill="#c23626" stroke="#00000022"/>
 <text x="322.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Crimson Ember</text>
 <text x="322.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#c23626</text>
-<rect x="372" y="38" width="76" height="76" rx="8" fill="#da5b2d" stroke="#00000022"/>
+<rect x="372" y="38" width="76" height="76" rx="8" fill="#f26e3f" stroke="#00000022"/>
 <text x="410.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Molten Rust</text>
-<text x="410.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#da5b2d</text>
+<text x="410.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#f26e3f</text>
 <rect x="460" y="38" width="76" height="76" rx="8" fill="#199647" stroke="#00000022"/>
 <text x="498.0" y="131" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Forest Kelly</text>
 <text x="498.0" y="144" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#199647</text>
@@ -51,4 +51,13 @@
 <text x="586.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#f6ebca</text>
 <rect x="636" y="170" width="76" height="76" rx="8" fill="#4376c2" stroke="#00000022"/>
 <text x="674.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Deep Indigo</text>
-<text x="674.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#4376c2</text></svg>
+<text x="674.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#4376c2</text>
+<rect x="724" y="170" width="76" height="76" rx="8" fill="#1c3139" stroke="#00000022"/>
+<text x="762.0" y="263" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Deep Slate</text>
+<text x="762.0" y="276" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#1c3139</text>
+<rect x="20" y="302" width="76" height="76" rx="8" fill="#8d9ba0" stroke="#00000022"/>
+<text x="58.0" y="395" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Slate Mist</text>
+<text x="58.0" y="408" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#8d9ba0</text>
+<rect x="108" y="302" width="76" height="76" rx="8" fill="#2c5084" stroke="#00000022"/>
+<text x="146.0" y="395" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="600" fill="#211d15" text-anchor="middle">Night Indigo</text>
+<text x="146.0" y="408" font-family="IBM Plex Mono, monospace" font-size="9" fill="#756c5b" text-anchor="middle">#2c5084</text></svg>

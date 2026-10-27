@@ -245,7 +245,7 @@ are companion repos generated from this same palette, implementing the shared
 | # | Swatch | Role | Hex | Contrast vs. bg |
 |---|---|---|---|---|
 | 8 | ![](assets/swatches/stone-gray.svg) | Bright black | `#566165` | 3.0:1 |
-| 9 | ![](assets/swatches/molten-rust.svg) | Bright red | `#da5b2d` | 5.0:1 |
+| 9 | ![](assets/swatches/molten-rust.svg) | Bright red | `#f26e3f` | 6.4:1 |
 | 10 | ![](assets/swatches/neon-lime.svg) | Bright green | `#8fe259` | 12.0:1 |
 | 11 | ![](assets/swatches/marigold.svg) | Bright yellow | `#febd5c` | 11.5:1 |
 | 12 | ![](assets/swatches/sky-flash.svg) | Bright blue | `#0ad6ff` | 11.0:1 |
@@ -254,6 +254,20 @@ are companion repos generated from this same palette, implementing the shared
 | 15 | ![](assets/swatches/warm-ivory.svg) | Bright white | `#f6ebca` | 16.0:1 |
 
 All 16 slots are unique.
+
+### UI roles
+
+Beyond the terminal, for app themes built on EmberTide (e.g. Faena). Card is the surface
+these are checked on.
+
+| Swatch | Role | Hex | Checked |
+|---|---|---|---|
+| ![](assets/swatches/deep-slate.svg) | Card | `#1c3139` | — |
+| ![](assets/swatches/slate-mist.svg) | Dim text (Slate Mist) | `#8d9ba0` | 6.7:1 on bg, 4.7:1 on card |
+| ![](assets/swatches/golden-orange.svg) | Accent with Ink Black text | `#ee9b00` | 8.5:1 |
+| ![](assets/swatches/molten-rust.svg) | Bright red as text on card | `#f26e3f` | 4.6:1 |
+| ![](assets/swatches/deep-indigo.svg) | Indigo | `#4376c2` | 4.2:1 on bg, ΔE 0.17 from blue |
+| ![](assets/swatches/night-indigo.svg) | Strong selection (Night Indigo) | `#2c5084` | Warm Ivory on it 6.8:1; ΔE 0.27 from bg, 0.15 from card |
 
 ### Palette
 
@@ -265,7 +279,7 @@ Every color the current theme actually uses, named:
 | ![](assets/swatches/vanilla-custard.svg) | Vanilla Custard | `#e9d8a6` | foreground, white, selection text |
 | ![](assets/swatches/golden-orange.svg) | Golden Orange | `#ee9b00` | cursor, yellow |
 | ![](assets/swatches/crimson-ember.svg) | Crimson Ember | `#c23626` | red |
-| ![](assets/swatches/molten-rust.svg) | Molten Rust | `#da5b2d` | bright red |
+| ![](assets/swatches/molten-rust.svg) | Molten Rust | `#f26e3f` | bright red, error text on cards |
 | ![](assets/swatches/forest-kelly.svg) | Forest Kelly | `#199647` | green |
 | ![](assets/swatches/neon-lime.svg) | Neon Lime | `#8fe259` | bright green |
 | ![](assets/swatches/azure.svg) | Azure | `#00b4d8` | blue |
@@ -277,7 +291,10 @@ Every color the current theme actually uses, named:
 | ![](assets/swatches/stone-gray.svg) | Stone Gray | `#566165` | bright black |
 | ![](assets/swatches/marigold.svg) | Marigold | `#febd5c` | bright yellow |
 | ![](assets/swatches/warm-ivory.svg) | Warm Ivory | `#f6ebca` | bright white |
-| ![](assets/swatches/deep-indigo.svg) | Deep Indigo | `#4376c2` | selection background |
+| ![](assets/swatches/deep-indigo.svg) | Deep Indigo | `#4376c2` | selection background, indigo |
+| ![](assets/swatches/deep-slate.svg) | Deep Slate | `#1c3139` | card |
+| ![](assets/swatches/slate-mist.svg) | Slate Mist | `#8d9ba0` | dim text |
+| ![](assets/swatches/night-indigo.svg) | Night Indigo | `#2c5084` | strong selection |
 
 ## Color reference — EmberTide Light
 
@@ -290,7 +307,7 @@ Swatches live in `assets/swatches/light/`.
 |---|---|---|---|
 | ![](assets/swatches/light/ivory-mist.svg) | Background | `#faf3e0` | — |
 | ![](assets/swatches/light/ink-black.svg) | Foreground | `#001219` | 17.2:1 vs. bg |
-| ![](assets/swatches/light/golden-orange.svg) | Cursor | `#a76f1c` | 3.8:1 vs. bg |
+| ![](assets/swatches/light/golden-orange.svg) | Cursor | `#a8701c` | 3.8:1 vs. bg |
 | ![](assets/swatches/light/indigo-mist.svg) | Selection background | `#b6d0f6` | 12.1:1 with foreground on it |
 
 ### ANSI — normal
@@ -300,7 +317,7 @@ Swatches live in `assets/swatches/light/`.
 | 0 | ![](assets/swatches/light/ivory-mist.svg) | Black | `#faf3e0` | — |
 | 1 | ![](assets/swatches/light/crimson-ember.svg) | Red | `#d33120` | 4.5:1 |
 | 2 | ![](assets/swatches/light/forest-kelly.svg) | Green | `#199245` | 3.6:1 |
-| 3 | ![](assets/swatches/light/golden-orange.svg) | Yellow | `#a76f1c` | 3.8:1 |
+| 3 | ![](assets/swatches/light/golden-orange.svg) | Yellow | `#a8701c` | 3.8:1 |
 | 4 | ![](assets/swatches/light/azure.svg) | Blue | `#137289` | 5.0:1 |
 | 5 | ![](assets/swatches/light/electric-violet.svg) | Magenta | `#ba3eff` | 3.6:1 |
 | 6 | ![](assets/swatches/light/lagoon-teal.svg) | Cyan | `#008d92` | 3.6:1 |
@@ -322,13 +339,24 @@ Swatches live in `assets/swatches/light/`.
 Black and white swap ends: black is the background (as in dark), white is Deep Slate and
 bright white is Ink Black, the foreground. All 16 slots are unique.
 
+### UI roles
+
+| Swatch | Role | Hex | Checked |
+|---|---|---|---|
+| ![](assets/swatches/light/paper-white.svg) | Card | `#fefdf9` | — |
+| ![](assets/swatches/light/slate-mist.svg) | Dim text (Slate Mist) | `#57666b` | 5.4:1 on bg, 5.9:1 on card |
+| ![](assets/swatches/light/golden-orange.svg) | Accent with Ink Black text | `#a8701c` | 4.5:1 (3.8:1 vs. bg) |
+| ![](assets/swatches/light/molten-rust.svg) | Bright red as text on card | `#ab3803` | 6.3:1 |
+| ![](assets/swatches/light/deep-indigo.svg) | Indigo (Deep Indigo) | `#2268cb` | 4.9:1 on bg, ΔE 0.12 from blue |
+| ![](assets/swatches/light/indigo-mist.svg) | Strong selection | `#b6d0f6` | Ink Black on it 12.1:1; ΔE 0.14 from bg, 0.16 from card |
+
 ### Palette
 
 | Swatch | Name | Hex | Used as |
 |---|---|---|---|
-| ![](assets/swatches/light/ink-black.svg) | Ink Black | `#001219` | foreground, bright white, selection text |
-| ![](assets/swatches/light/ivory-mist.svg) | Ivory Mist | `#faf3e0` | background, black, cursor text |
-| ![](assets/swatches/light/golden-orange.svg) | Golden Orange | `#a76f1c` | cursor, yellow |
+| ![](assets/swatches/light/ink-black.svg) | Ink Black | `#001219` | foreground, bright white, selection and cursor text |
+| ![](assets/swatches/light/ivory-mist.svg) | Ivory Mist | `#faf3e0` | background, black |
+| ![](assets/swatches/light/golden-orange.svg) | Golden Orange | `#a8701c` | cursor, yellow |
 | ![](assets/swatches/light/crimson-ember.svg) | Crimson Ember | `#d33120` | red |
 | ![](assets/swatches/light/molten-rust.svg) | Molten Rust | `#ab3803` | bright red |
 | ![](assets/swatches/light/forest-kelly.svg) | Forest Kelly | `#199245` | green |
@@ -342,7 +370,10 @@ bright white is Ink Black, the foreground. All 16 slots are unique.
 | ![](assets/swatches/light/stone-gray.svg) | Stone Gray | `#7d888d` | bright black |
 | ![](assets/swatches/light/marigold.svg) | Marigold | `#845800` | bright yellow |
 | ![](assets/swatches/light/deep-slate.svg) | Deep Slate | `#1c3139` | white |
-| ![](assets/swatches/light/indigo-mist.svg) | Indigo Mist | `#b6d0f6` | selection background |
+| ![](assets/swatches/light/indigo-mist.svg) | Indigo Mist | `#b6d0f6` | selection background, strong selection |
+| ![](assets/swatches/light/paper-white.svg) | Paper White | `#fefdf9` | card |
+| ![](assets/swatches/light/slate-mist.svg) | Slate Mist | `#57666b` | dim text |
+| ![](assets/swatches/light/deep-indigo.svg) | Deep Indigo | `#2268cb` | indigo |
 
 ## Regenerating
 
@@ -368,7 +399,11 @@ The script asserts, for both variants, before writing anything:
 - every hue-bearing accent color sits at ≥65% of the maximum chroma reachable at its
   own lightness and hue,
 - every pair of hue-bearing accents is ΔE ≥0.08 apart in OKLab,
-- every light accent stays within 5° of its dark counterpart's OKLCH hue.
+- every light accent stays within 5° of its dark counterpart's OKLCH hue,
+- the UI roles hold: dim text ≥4.5:1 on the background and the card, sitting between
+  bright black and the foreground; Ink Black text ≥4.5:1 on the accent; bright red ≥4.5:1
+  as text on the card; indigo ≥3:1 on the background and ΔE ≥0.08 from blue; bright white
+  ≥4.5:1 on the strong selection, which sits ΔE ≥0.08 from the background and the card.
 
 If an edit fails one of those, the script exits with an assertion error instead of
 writing a file that quietly breaks the guarantees above.
