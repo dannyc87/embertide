@@ -12,15 +12,36 @@ every color is checked against are defined in this repo's [README](README.md#des
 this document only covers the *role mapping*, not the color values or how they were
 chosen.
 
+The mapping holds for both variants, EmberTide (dark) and EmberTide Light. Each named
+accent keeps its hue in both; only its lightness and chroma differ. An implementation
+ships light by swapping the hex table, not the mapping. Where a role uses a different
+named color in light, the tables below say so.
+
 ## Core roles
 
-| Role | Named color |
-|---|---|
-| Background | Ink Black |
-| Foreground | Vanilla Custard |
-| Cursor / accent | Golden Orange |
-| Selection background | Deep Indigo |
-| Dim / de-emphasized UI | Stone Gray (bright black) |
+| Role | Named color | Light, where it differs |
+|---|---|---|
+| Background | Ink Black | Ivory Mist |
+| Foreground | Vanilla Custard | Ink Black |
+| Cursor / accent | Golden Orange | |
+| Selection background | Deep Indigo | Indigo Mist |
+| Dim / de-emphasized UI | Stone Gray (bright black) | |
+
+### UI roles
+
+For app themes built on EmberTide (e.g. Faena); terminals don't use these.
+
+| Role | Named color | Light, where it differs |
+|---|---|---|
+| Card surface | Deep Slate | Paper White |
+| Dim text (readable, on background and card) | Slate Mist | |
+| Text on accent fills | Ink Black | |
+| Error text on cards | Molten Rust (bright red) | |
+| Indigo (links, charts) | Deep Indigo | |
+| Strong selection (bright-white text on it) | Night Indigo | Indigo Mist |
+
+Dim text (Slate Mist) is for readable secondary text; Stone Gray stays the dim for
+de-emphasized UI and comments.
 
 "Accent" and "dim" recur constantly below — accent marks the one CTA-like highlight
 color (cursor, active-tab underline, primary buttons); dim marks anything intentionally
@@ -32,18 +53,26 @@ The terminal's 16 ANSI slots are the root of everything else — both editor the
 this exact mapping for their embedded terminal/console panels (VS Code's `terminal.ansi*`
 keys, JetBrains's `BLOCK_TERMINAL_*` and `CONSOLE_*_OUTPUT` keys).
 
-| # | Role | Named color |
-|---|---|---|
-| 0 / 8 | Black / bright black | Ink Black / Stone Gray |
-| 1 / 9 | Red / bright red | Crimson Ember / Molten Rust |
-| 2 / 10 | Green / bright green | Forest Kelly / Neon Lime |
-| 3 / 11 | Yellow / bright yellow | Golden Orange / Marigold |
-| 4 / 12 | Blue / bright blue | Azure / Sky Flash |
-| 5 / 13 | Magenta / bright magenta | Electric Violet / Lilac Flash |
-| 6 / 14 | Cyan / bright cyan | Lagoon Teal / Pearl Aqua |
-| 7 / 15 | White / bright white | Vanilla Custard / Warm Ivory |
+| # | Role | Named color | Light, where it differs |
+|---|---|---|---|
+| 0 / 8 | Black / bright black | Ink Black / Stone Gray | Ivory Mist / Stone Gray |
+| 1 / 9 | Red / bright red | Crimson Ember / Molten Rust | |
+| 2 / 10 | Green / bright green | Forest Kelly / Neon Lime | |
+| 3 / 11 | Yellow / bright yellow | Golden Orange / Marigold | |
+| 4 / 12 | Blue / bright blue | Azure / Sky Flash | |
+| 5 / 13 | Magenta / bright magenta | Electric Violet / Lilac Flash | |
+| 6 / 14 | Cyan / bright cyan | Lagoon Teal / Pearl Aqua | |
+| 7 / 15 | White / bright white | Vanilla Custard / Warm Ivory | Deep Slate / Ink Black |
 
-See the main [README's color reference](README.md#color-reference) for exact hex values.
+In both variants black is the background color and bright white is the strongest
+neutral (Warm Ivory, past the foreground, in dark; Ink Black, the foreground itself, in
+light). In light those ends swap, so black is light and white is dark. "Bright"
+always means further from the background: lighter in dark, darker in light. So in light
+the bright row is the darker, higher-contrast one, and every syntax role below that
+names a bright color reads as the more emphatic one in both variants.
+
+See the main [README's color reference](README.md#color-reference) for exact hex values
+(dark), and [EmberTide Light](README.md#color-reference--embertide-light) for light.
 
 ## Syntax roles
 
